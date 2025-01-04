@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import styles from "./jobs.module.css"; // Import CSS Module
 
 export default function Page() {
@@ -51,61 +52,65 @@ export default function Page() {
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.jobs}>
             <h1 className={styles.title}>Busca de Vagas</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.formGroup}>
-                    <label htmlFor="searchTerm">Termo de Busca</label>
-                    <input
-                        type="text"
-                        id="searchTerm"
-                        name="searchTerm"
-                        value={formData.searchTerm}
-                        onChange={handleChange}
-                        required
-                    />
+                <div className={styles.multiColumn}>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="searchTerm">Termo de Busca</label>
+                        <input
+                            type="text"
+                            id="searchTerm"
+                            name="searchTerm"
+                            value={formData.searchTerm}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="location">Localização</label>
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
                 </div>
 
-                <div className={styles.formGroup}>
-                    <label htmlFor="location">Localização</label>
-                    <input
-                        type="text"
-                        id="location"
-                        name="location"
-                        value={formData.location}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <div className={styles.multiColumn}>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="siteName">Site</label>
+                        <select
+                            id="siteName"
+                            name="siteName"
+                            value={formData.siteName}
+                            onChange={handleChange}
+                        >
+                            <option value="indeed">Indeed</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="vagas">Vagas</option>
+                            <option value="glassdoor">Glassdoor</option>
+                            <option value="google">Google</option>
+                        </select>
+                    </div>
 
-                <div className={styles.formGroup}>
-                    <label htmlFor="siteName">Site</label>
-                    <select
-                        id="siteName"
-                        name="siteName"
-                        value={formData.siteName}
-                        onChange={handleChange}
-                    >
-                        <option value="indeed">Indeed</option>
-                        <option value="linkedin">LinkedIn</option>
-                        <option value="vagas">Vagas</option>
-                        <option value="glassdoor">Glassdoor</option>
-                        <option value="google">Google</option>
-                    </select>
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label htmlFor="resultsWanted">
-                        Quantidade de Resultados
-                    </label>
-                    <input
-                        type="number"
-                        id="resultsWanted"
-                        name="resultsWanted"
-                        value={formData.resultsWanted}
-                        onChange={handleChange}
-                        min="1"
-                    />
+                    <div className={styles.formGroup}>
+                        <label htmlFor="resultsWanted">
+                            Quantidade de Resultados
+                        </label>
+                        <input
+                            type="number"
+                            id="resultsWanted"
+                            name="resultsWanted"
+                            value={formData.resultsWanted}
+                            onChange={handleChange}
+                            min="1"
+                        />
+                    </div>
                 </div>
 
                 <button
@@ -125,13 +130,15 @@ export default function Page() {
                         <h2>{job.title}</h2>
                         <p>{job.company}</p>
                         <p>{job.location}</p>
-                        <a
-                            href={job.url}
+                        <p>{job.job_type}</p>
+                        <p>{job.date_posted}</p>
+                        <Link
+                            href={job.job_url}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Ver Detalhes
-                        </a>
+                            Ver vaga
+                        </Link>
                     </div>
                 ))}
             </div>

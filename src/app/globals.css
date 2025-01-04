@@ -2,6 +2,8 @@
 
 :root {
     --text: hsl(210, 7%, 10%);
+    --border: gray;
+    --primary-color: hsl(210, 42%, 25%);
 }
 
 html,
@@ -11,10 +13,22 @@ body {
 }
 
 body {
-    padding: 3rem;
+    padding: 4rem;
     color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }
 
 * {

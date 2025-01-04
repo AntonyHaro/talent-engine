@@ -54,7 +54,7 @@ export default function Page() {
     };
 
     return (
-        <div className={styles.container}>
+        <main className={styles.cv}>
             <h1>Analisador de Currículos</h1>
 
             <form
@@ -75,7 +75,7 @@ export default function Page() {
                     disabled={loading}
                     className={styles.uploadButton}
                 >
-                    {loading ? "Enviando..." : "Enviar e Resumir PDF"}
+                    {loading ? "Enviando..." : "Enviar"}
                 </button>
             </form>
 
@@ -86,6 +86,6 @@ export default function Page() {
                     <ReactMarkdown>{output}</ReactMarkdown>
                 </div>
             )}
-        </div>
+        </main>
     );
 }

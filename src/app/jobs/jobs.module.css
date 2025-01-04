@@ -1,0 +1,86 @@
+/* index.module.css */
+.jobs {
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+}
+
+.multiColumn {
+    display: flex;
+    gap: 1.3rem;
+}
+
+.formGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.2rem;
+    border: 1px dashed gray;
+    border-radius: 6px;
+}
+
+.formGroup label {
+    font-weight: bold;
+}
+
+.formGroup input,
+.formGroup select {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.button {
+    margin-top: 2%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.button:disabled {
+    background-color: #b0b0b0;
+}
+
+.error {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.results {
+    margin-top: 2rem;
+}
+
+.jobCard {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.jobCard h2 {
+    margin: 0 0 0.5rem;
+}
+
+.jobCard a {
+    color: #0070f3;
+    text-decoration: none;
+}
