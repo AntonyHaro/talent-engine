@@ -13,5 +13,6 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, ""), // Remove o prefixo "/api" ao encaminhar a solicitação
             },
         },
+        port: 3000,
     },
 });

@@ -30,6 +30,7 @@ export default function Curriculum() {
 
         const formData = new FormData();
         formData.append("file", file);
+        formData.append("job", job)
 
         setLoading(true);
         setError(null);
@@ -46,8 +47,6 @@ export default function Curriculum() {
             }
 
             const data = await response.json();
-            console.log(data);
-            console.log(data.response);
             setOutput(data.response || "Nenhuma resposta válida recebida.");
         } catch (err) {
             setError(err.message);

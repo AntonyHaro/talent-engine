@@ -26,7 +26,6 @@ export default function Page() {
             ...formData,
             [name]: type === "checkbox" ? checked : value,
         });
-        console.log(formData);
     };
 
     const handleSubmit = async (e) => {
@@ -135,9 +134,7 @@ export default function Page() {
                         >
                             <option value="indeed">Indeed</option>
                             <option value="linkedin">LinkedIn</option>
-                            <option value="vagas">Vagas</option>
                             <option value="glassdoor">Glassdoor</option>
-                            <option value="google">Google</option>
                         </select>
                     </div>
 
@@ -214,15 +211,16 @@ export default function Page() {
                                 <strong>Empresa: </strong> {job.company}
                             </p>
                             <p>
-                                <strong>Localidade: </strong>s{job.location}
+                                <strong>Localidade: </strong>s
+                                {job.location || "Não informada"}
                             </p>
                             <p>
                                 <strong>Tipo de trabalho: </strong>
-                                {job.job_type}
+                                {job.job_type || "Não informado"}
                             </p>
                             <p>
                                 <strong>Data postada: </strong>
-                                {job.date_posted}
+                                {job.date_posted || "Não informada"}
                             </p>
                         </div>
                         <a
