@@ -74,13 +74,14 @@ export default function Page() {
                         <div className={styles.icon}>
                             <IoMdSearch />
                         </div>
-                        Termo de Busca
+                        Palavras-chave
                     </label>
                     <input
                         type="text"
                         id="searchTerm"
                         name="searchTerm"
                         value={formData.searchTerm}
+                        placeholder="Palavras-chave:"
                         onChange={handleChange}
                         required
                     />
@@ -99,6 +100,7 @@ export default function Page() {
                             id="location"
                             name="location"
                             value={formData.location}
+                            placeholder="Localização:"
                             onChange={handleChange}
                             required
                         />
@@ -162,57 +164,41 @@ export default function Page() {
                         </div>
                         Tipo de Trabalho
                     </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="jobType"
-                            value="fulltime"
-                            checked={formData.jobType === "fulltime"}
-                            onChange={handleChange}
-                        />
-                        Tempo Integral
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="jobType"
-                            value="parttime"
-                            checked={formData.jobType === "parttime"}
-                            onChange={handleChange}
-                        />
-                        Meio Período
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="jobType"
-                            value="internship"
-                            checked={formData.jobType === "internship"}
-                            onChange={handleChange}
-                        />
-                        Estágio
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="jobType"
-                            value="contract"
-                            checked={formData.jobType === "contract"}
-                            onChange={handleChange}
-                        />
-                        Contrato
-                    </label>
+                    <div className={styles.multiColumn}>
+                        {["fulltime", "parttime", "internship", "contract"].map(
+                            (type) => (
+                                <label
+                                    key={type}
+                                    className={`${styles.jobType} ${
+                                        formData.jobType === type
+                                            ? styles.selected
+                                            : ""
+                                    }`}
+                                >
+                                    {type === "fulltime" && "Tempo Integral"}
+                                    {type === "parttime" && "Meio Período"}
+                                    {type === "internship" && "Estágio"}
+                                    {type === "contract" && "Contrato"}
+                                    <input
+                                        type="radio"
+                                        name="jobType"
+                                        value={type}
+                                        checked={formData.jobType === type}
+                                        onChange={handleChange}
+                                    />
+                                </label>
+                            )
+                        )}
+                    </div>
                 </div>
 
-                <div className={styles.multiColumn}>
-                    <button
-                        type="submit"
-                        className={styles.button}
-                        disabled={loading}
-                    >
-                        {loading ? "Buscando..." : "Buscar Vagas"}
-                    </button>
-                </div>
+                <button
+                    type="submit"
+                    className={styles.button}
+                    disabled={loading}
+                >
+                    {loading ? "Buscando..." : "Buscar Vagas!"}
+                </button>
             </form>
 
             {error && <p className={styles.error}>Erro: {error}</p>}
@@ -221,10 +207,22 @@ export default function Page() {
                 {jobs.map((job, index) => (
                     <div key={index} className={styles.jobCard}>
                         <h2>{job.title}</h2>
-                        <p>{job.company}</p>
-                        <p>{job.location}</p>
-                        <p>{job.job_type}</p>
-                        <p>{job.date_posted}</p>
+                        <div className={styles.jobInfo}>
+                            <p>
+                                <strong>Empresa: </strong> {job.company}
+                            </p>
+                            <p>
+                                <strong>Localidade: </strong>s{job.location}
+                            </p>
+                            <p>
+                                <strong>Tipo de trabalho: </strong>
+                                {job.job_type}
+                            </p>
+                            <p>
+                                <strong>Data postada: </strong>
+                                {job.date_posted}
+                            </p>
+                        </div>
                         <Link
                             href={job.job_url}
                             target="_blank"
