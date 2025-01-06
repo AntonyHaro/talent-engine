@@ -1,20 +1,72 @@
-.cv form {
-    display: grid;
+.cv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: var(--primary-color);
+}
+
+.form {
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
 }
 
-.cv form button {
-    color: white;
-    background-color: var(--primary-color);
-    border: 1px solid transparent;
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
+.form textarea {
+    width: 100%;
+    height: 300px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    resize: none;
+    overflow-y: auto;
+    outline: none;
+    border-radius: 5px
+}
+
+.button {
+    /* flex: 0.7; */
+    width: 75%;
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: transparent;
+    color: var(--border);
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    transition: 0.2s;
+}
+
+.button:not(:disabled):hover {
+    cursor: pointer;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-0.2rem);
+}
+
+.button:disabled {
+    background-color: hsl(0, 0%, 90%);
+    color: var(--border);
+    border: var(--border);
+}
+
+.error {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
 }
 
 .output {
+    padding: 2rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
     font-size: 14px;
     width: 70vw;
-    /* max-width: 800px; */
     background-color: transparent;
     overflow: hidden;
 }

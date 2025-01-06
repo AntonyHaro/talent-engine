@@ -6,12 +6,17 @@ import ReactMarkdown from "react-markdown";
 
 export default function Page() {
     const [file, setFile] = useState(null);
+    const [job, setJob] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [output, setOutput] = useState("");
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
+    };
+
+    const handleJobChange = (event) => {
+        setJob(event.target.value);
     };
 
     const uploadAndSummarizePDF = async () => {
@@ -55,8 +60,11 @@ export default function Page() {
 
     return (
         <main className={styles.cv}>
-            <h1>Analisador de Currículos</h1>
-
+            <h1 className={styles.title}>Analisador de Currículos</h1>
+            <p style={{ color: "gray", marginBottom: "3%" }}>
+                Adicione o currículo e as informações da vaga para inciar a
+                análise com a Inteligência Artificial
+            </p>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -67,13 +75,19 @@ export default function Page() {
                 <input
                     type="file"
                     id="file-input"
+                    name="file-input"
                     onChange={handleFileChange}
                     className={styles.fileInput}
+                />
+                <textarea
+                    value={job}
+                    onChange={handleJobChange}
+                    placeholder="Insira a descrição da vaga aqui..."
                 />
                 <button
                     type="submit"
                     disabled={loading}
-                    className={styles.uploadButton}
+                    className={styles.button}
                 >
                     {loading ? "Enviando..." : "Enviar"}
                 </button>

@@ -48,6 +48,7 @@ export default function Page() {
                     results_wanted: formData.resultsWanted,
                     is_remote: formData.isRemote,
                     job_type: formData.jobType,
+                    use_tor: true,
                 }),
             });
 
@@ -67,7 +68,11 @@ export default function Page() {
 
     return (
         <div className={styles.jobs}>
-            <h1 className={styles.title}>Busca de Vagas</h1>
+            <h1 className={styles.title}>Buscador de Vagas</h1>
+            <p style={{ color: "gray", marginBottom: "3%" }}>
+                Selecione os filtros que deseja para buscar vagas com parâmetros
+                personalizados.
+            </p>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.formGroup}>
                     <label htmlFor="searchTerm">
