@@ -1,10 +1,8 @@
-"use client";
-
 import { useState } from "react";
-import styles from "./cv.module.css";
+import styles from "./Curriculum.module.css";
 import ReactMarkdown from "react-markdown";
 
-export default function Page() {
+export default function Curriculum() {
     const [file, setFile] = useState(null);
     const [job, setJob] = useState("");
     const [loading, setLoading] = useState(false);
@@ -89,7 +87,7 @@ export default function Page() {
                     disabled={loading}
                     className={styles.button}
                 >
-                    {loading ? "Enviando..." : "Enviar"}
+                    {loading ? "Carregando..." : "Carregar análise!"}
                 </button>
             </form>
 

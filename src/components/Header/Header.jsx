@@ -1,8 +1,8 @@
 import { LuGlasses } from "react-icons/lu";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
-export default function Header() {
+function Header() {
     return (
         <header className={styles.header}>
             <h1>
@@ -14,13 +14,15 @@ export default function Header() {
             <nav>
                 <ul>
                     <li>
-                        <Link href={"/cv"}>CV Analyzer</Link>
+                        <Link to={"/cv"}>CV Analyzer</Link>
                     </li>
                     <li>
-                        <Link href={"/jobs"}>Job Finder</Link>
+                        <Link to={"/jobs"}>Job Finder</Link>
                     </li>
                 </ul>
             </nav>
         </header>
     );
 }
+
+export default Header;

@@ -5,15 +5,20 @@
     --border: gray;
     --input-bgc: hsl(210, 7%, 87%);
     --primary-color: hsl(210, 42%, 25%);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html,
-body {
+body,
+#root {
     max-width: 100vw;
     overflow-x: hidden;
 }
 
-body {
+#root {
     padding: 4rem;
     color: var(--text);
     display: flex;
@@ -25,6 +30,7 @@ body {
 }
 
 main {
+    margin-top: 4rem;
     width: 100%;
     display: flex;
     flex-direction: column;

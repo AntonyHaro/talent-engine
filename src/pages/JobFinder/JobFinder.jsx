@@ -1,14 +1,11 @@
-"use client";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
-import { RiRemoteControlLine } from "react-icons/ri";
 import { LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFormatListNumbered } from "react-icons/md";
 
 import { useState } from "react";
-import Link from "next/link";
-import styles from "./jobs.module.css"; // Import CSS Module
+import styles from "./JobFinder.module.css";
 
 export default function Page() {
     const [formData, setFormData] = useState({
@@ -67,7 +64,7 @@ export default function Page() {
     };
 
     return (
-        <div className={styles.jobs}>
+        <main className={styles.jobs}>
             <h1 className={styles.title}>Buscador de Vagas</h1>
             <p style={{ color: "gray", marginBottom: "3%" }}>
                 Selecione os filtros que deseja para buscar vagas com parâmetros
@@ -228,16 +225,16 @@ export default function Page() {
                                 {job.date_posted}
                             </p>
                         </div>
-                        <Link
+                        <a
                             href={job.job_url}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             Ver vaga
-                        </Link>
+                        </a>
                     </div>
                 ))}
             </div>
-        </div>
+        </main>
     );
 }
