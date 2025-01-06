@@ -3,6 +3,7 @@
 :root {
     --text: hsl(210, 7%, 10%);
     --border: gray;
+    --input-bgc: hsl(210, 7%, 87%);
     --primary-color: hsl(210, 42%, 25%);
 }
 
@@ -17,7 +18,7 @@ body {
     color: var(--text);
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
     align-items: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

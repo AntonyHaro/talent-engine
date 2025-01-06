@@ -1,6 +1,6 @@
 /* index.module.css */
 .jobs {
-    max-width: 80vw;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -13,12 +13,14 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.3rem;
+    gap: 4rem;
 }
 
 .multiColumn {
+    width: 100%;
     display: flex;
-    gap: 1.3rem;
+    align-items: center;
+    gap: 2rem;
 }
 
 .formGroup {
@@ -26,32 +28,99 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1.2rem;
-    border: 1px dashed gray;
-    border-radius: 6px;
 }
 
 .formGroup label {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    /* gap: 0.4rem; */
 }
 
-.formGroup input,
-.formGroup select {
-    border: 1px solid var(--border);
+.icon {
+    display: grid;
+    place-items: center;
+    padding: 0.3em;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.form svg {
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+
+.form input[type="text"],
+.form input[type="number"],
+.form select {
+    flex: 1;
+    /* background-color: var(--input-bgc); */
+    border: 0;
+    border: 1px solid lightgray;
     border-radius: 4px;
     padding: 0.5rem;
     font-size: 1rem;
 }
 
+.form input[type="text"]:focus,
+.form input[type="number"]:focus,
+.form select:focus {
+    outline: 1px solid gray;
+}
+
+.isRemote {
+    border: 1px dashed var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+    font-weight: normal;
+}
+
+.isRemote:hover {
+    transform: translateY(-0.2rem);
+    background-color: var(--primary-color);
+    border-color: transparent;
+    color: white;
+}
+
+.isRemote:hover input[type="checkbox"]:checked {
+    background-color: white;
+}
+
+.isRemote input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.isRemote input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+}
+
 .button {
-    margin-top: 2%;
+    flex: 1;
     padding: 0.75rem;
     font-size: 1rem;
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    border-radius: 4px;
-    border: 1px solid transparent;
+    background-color: transparent;
+    color: var(--primary-color);
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
     cursor: pointer;
 }
 
