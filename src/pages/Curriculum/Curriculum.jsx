@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LuGlasses } from "react-icons/lu";
 import styles from "./Curriculum.module.css";
 import ReactMarkdown from "react-markdown";
 
@@ -57,7 +58,12 @@ export default function Curriculum() {
 
     return (
         <main className={styles.cv}>
-            <h1 className={styles.title}>Analisador de Currículos</h1>
+            <h1 className={styles.title}>
+                <div className={styles.svg}>
+                    <LuGlasses />
+                </div>
+                Analisador de Currículos
+            </h1>
             <p style={{ color: "gray", marginBottom: "3%" }}>
                 Adicione o currículo e as informações da vaga para inciar a
                 análise com a Inteligência Artificial.

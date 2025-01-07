@@ -11,6 +11,22 @@
     font-size: 2rem;
     margin-bottom: 1.1rem;
     color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.svg {
+    padding: 0.4rem;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+}
+
+.svg svg {
+    font-size: 0.7em;
+    color: var(--primary-color);
 }
 
 .form {

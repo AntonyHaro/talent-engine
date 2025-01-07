@@ -8,6 +8,10 @@ import { MdSaveAlt } from "react-icons/md";
 import { useState } from "react";
 import styles from "./JobFinder.module.css";
 
+function job(job) {
+    
+}
+
 export default function Page() {
     const [formData, setFormData] = useState({
         searchTerm: "",
@@ -99,9 +103,21 @@ export default function Page() {
         console.log(updatedFavoriteJobs);
     };
 
+    const isSaved = (job) => {
+        const favoriteJobs =
+            JSON.parse(localStorage.getItem("favoriteJobs")) || [];
+
+        return favoriteJobs.some((fav) => fav.id === job.id); // Sem conversão desnecessária
+    };
+
     return (
         <main className={styles.jobs}>
-            <h1 className={styles.title}>Buscador de Vagas</h1>
+            <h1 className={styles.title}>
+                <div className={styles.svg}>
+                    <LuBriefcaseBusiness />
+                </div>
+                Buscador de Vagas
+            </h1>
             <p style={{ color: "gray", marginBottom: "3%" }}>
                 Selecione os filtros que deseja para buscar vagas com parâmetros
                 personalizados.
@@ -269,7 +285,8 @@ export default function Page() {
                                 Ver vaga
                             </a>
                             <button onClick={() => handleSave(job)}>
-                                <MdSaveAlt /> Salvar vaga
+                                <MdSaveAlt />{" "}
+                                {isSaved(job) ? "Vaga salva" : "Salvar vaga"}
                             </button>
                         </div>
                     </div>
