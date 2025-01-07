@@ -7,6 +7,7 @@
 
 .title {
     color: var(--primary-color);
+    margin-bottom: 1.1rem;
 }
 
 .form {
@@ -69,6 +70,7 @@
     width: 70vw;
     background-color: transparent;
     overflow: hidden;
+    margin-top: 2%;
 }
 
 /* Cabeçalhos */

@@ -1,4 +1,5 @@
 import { LuGlasses } from "react-icons/lu";
+import { FaGear } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
@@ -7,7 +8,7 @@ function Header() {
         <header className={styles.header}>
             <h1>
                 <div className={styles.svg}>
-                    <LuGlasses />
+                    <FaGear />
                 </div>
                 Talent Engine
             </h1>

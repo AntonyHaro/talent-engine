@@ -30,13 +30,13 @@ export default function Curriculum() {
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("job", job)
+        formData.append("job", job);
 
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch("/api/cv", {
+            const response = await fetch("/api/cv/", {
                 method: "POST",
                 body: formData,
             });
@@ -60,7 +60,7 @@ export default function Curriculum() {
             <h1 className={styles.title}>Analisador de Currículos</h1>
             <p style={{ color: "gray", marginBottom: "3%" }}>
                 Adicione o currículo e as informações da vaga para inciar a
-                análise com a Inteligência Artificial
+                análise com a Inteligência Artificial.
             </p>
             <form
                 onSubmit={(e) => {
@@ -92,11 +92,9 @@ export default function Curriculum() {
 
             {error && <p className={styles.error}>Erro: {error}</p>}
 
-            {output && (
-                <div className={styles.output}>
-                    <ReactMarkdown>{output}</ReactMarkdown>
-                </div>
-            )}
+            <div className={styles.output}>
+                <ReactMarkdown>{output}</ReactMarkdown>
+            </div>
         </main>
     );
 }

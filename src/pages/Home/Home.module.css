@@ -1,0 +1,56 @@
+.home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.1rem;
+    color: var(--primary-color);
+}
+
+.featureContainer {
+    width: 75%;
+    display: grid;
+    gap: 1rem;
+}
+
+.featureCard {
+    padding: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    gap: 1.7rem;
+    transition: 0.2s ease-out;
+}
+
+.featureCard:hover {
+    border-color: var(--border);
+    transform: translateX(0.5rem);
+}
+
+.svg {
+    padding: 0.7rem;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+}
+
+.svg svg {
+    font-size: 1.4em;
+    color: var(--primary-color);
+}
+
+.featureCard .info {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.description {
+    color: hsl(0, 0%, 38%);
+}
