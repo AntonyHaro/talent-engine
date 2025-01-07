@@ -211,6 +211,10 @@
 
 .jobCard:hover {
     border-color: var(--border);
+
+    button {
+        opacity: 1;
+    }
 }
 
 .jobCard h2 {
@@ -233,4 +237,38 @@
 .jobCard a:hover {
     color: hsl(210, 79%, 39%);
     padding-left: 0.25rem;
+}
+
+.flexContainer {
+    margin-top: 4.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flexContainer button {
+    opacity: 0;
+    border: 1px dashed var(--border);
+    color: var(--border);
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 0.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.flexContainer button svg {
+    font-size: 1.5em;
+}
+
+.flexContainer button:hover {
+    /* border-color: var(--primary-color);
+    color: var(--primary-color); */
+    border-color: hsl(93, 100%, 34%);
+    color: hsl(93, 100%, 34%);
 }

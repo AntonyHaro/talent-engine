@@ -3,6 +3,7 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
 import { LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFormatListNumbered } from "react-icons/md";
+import { MdSaveAlt } from "react-icons/md";
 
 import { useState } from "react";
 import styles from "./JobFinder.module.css";
@@ -60,6 +61,42 @@ export default function Page() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleSave = (job) => {
+        if (!job || typeof job !== "object") {
+            console.error("O argumento precisa ser um objeto válido.");
+            return;
+        }
+
+        const favoriteJobs =
+            JSON.parse(localStorage.getItem("favoriteJobs")) || [];
+
+        // Verifica se o job já está nos favoritos
+        const isAlreadyFavorite = favoriteJobs.some((fav) => fav.id === job.id);
+
+        if (isAlreadyFavorite) {
+            // Remove o job dos favoritos
+            const updatedFavoriteJobs = favoriteJobs.filter(
+                (fav) => fav.id !== job.id
+            );
+
+            localStorage.setItem(
+                "favoriteJobs",
+                JSON.stringify(updatedFavoriteJobs)
+            );
+            console.log(updatedFavoriteJobs);
+            return;
+        }
+
+        // Adiciona o job aos favoritos
+        const updatedFavoriteJobs = [...favoriteJobs, job];
+
+        localStorage.setItem(
+            "favoriteJobs",
+            JSON.stringify(updatedFavoriteJobs)
+        );
+        console.log(updatedFavoriteJobs);
     };
 
     return (
@@ -223,13 +260,18 @@ export default function Page() {
                                 {job.date_posted || "Não informada"}
                             </p>
                         </div>
-                        <a
-                            href={job.job_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Ver vaga
-                        </a>
+                        <div className={styles.flexContainer}>
+                            <a
+                                href={job.job_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Ver vaga
+                            </a>
+                            <button onClick={() => handleSave(job)}>
+                                <MdSaveAlt /> Salvar vaga
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
