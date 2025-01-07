@@ -3,13 +3,94 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
 import { LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFormatListNumbered } from "react-icons/md";
-import { MdSaveAlt } from "react-icons/md";
+import { FaRegStar } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
 
 import { useState } from "react";
 import styles from "./JobFinder.module.css";
 
-function job(job) {
-    
+function JobCard({ job }) {
+    const [saved, setSaved] = useState(false);
+
+    const handleSave = (job) => {
+        if (!job || typeof job !== "object") {
+            console.error("O argumento precisa ser um objeto válido.");
+            return;
+        }
+
+        const favoriteJobs =
+            JSON.parse(localStorage.getItem("favoriteJobs")) || [];
+
+        // Verifica se o job já está nos favoritos
+        const isAlreadyFavorite = favoriteJobs.some((fav) => fav.id === job.id);
+
+        if (isAlreadyFavorite) {
+            // Remove o job dos favoritos
+            const updatedFavoriteJobs = favoriteJobs.filter(
+                (fav) => fav.id !== job.id
+            );
+
+            localStorage.setItem(
+                "favoriteJobs",
+                JSON.stringify(updatedFavoriteJobs)
+            );
+
+            setSaved(false);
+            console.log(updatedFavoriteJobs);
+            return;
+        }
+
+        // Adiciona o job aos favoritos
+        const updatedFavoriteJobs = [...favoriteJobs, job];
+
+        localStorage.setItem(
+            "favoriteJobs",
+            JSON.stringify(updatedFavoriteJobs)
+        );
+
+        setSaved(true);
+        console.log(updatedFavoriteJobs);
+    };
+
+    return (
+        <div className={styles.jobCard}>
+            <h2>{job.title}</h2>
+            <div className={styles.jobInfo}>
+                <p>
+                    <strong>Empresa: </strong> {job.company}
+                </p>
+                <p>
+                    <strong>Localidade: </strong>
+                    {job.location || "Não informada"}
+                </p>
+                <p>
+                    <strong>Tipo de trabalho: </strong>
+                    {job.job_type || "Não informado"}
+                </p>
+                <p>
+                    <strong>Data postada: </strong>
+                    {job.date_posted || "Não informada"}
+                </p>
+            </div>
+            <div className={styles.flexContainer}>
+                <a href={job.job_url} target="_blank" rel="noopener noreferrer">
+                    Ver vaga
+                </a>
+                <button onClick={() => handleSave(job)}>
+                    {/* {saved ?  : < />} */}
+                    {saved ? (
+                        <>
+                            <FaStar /> Vaga salva
+                        </>
+                    ) : (
+                        <>
+                            <FaRegStar /> Salvar vaga
+                        </>
+                    )}
+                </button>
+            </div>
+        </div>
+    );
 }
 
 export default function Page() {
@@ -65,49 +146,6 @@ export default function Page() {
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleSave = (job) => {
-        if (!job || typeof job !== "object") {
-            console.error("O argumento precisa ser um objeto válido.");
-            return;
-        }
-
-        const favoriteJobs =
-            JSON.parse(localStorage.getItem("favoriteJobs")) || [];
-
-        // Verifica se o job já está nos favoritos
-        const isAlreadyFavorite = favoriteJobs.some((fav) => fav.id === job.id);
-
-        if (isAlreadyFavorite) {
-            // Remove o job dos favoritos
-            const updatedFavoriteJobs = favoriteJobs.filter(
-                (fav) => fav.id !== job.id
-            );
-
-            localStorage.setItem(
-                "favoriteJobs",
-                JSON.stringify(updatedFavoriteJobs)
-            );
-            console.log(updatedFavoriteJobs);
-            return;
-        }
-
-        // Adiciona o job aos favoritos
-        const updatedFavoriteJobs = [...favoriteJobs, job];
-
-        localStorage.setItem(
-            "favoriteJobs",
-            JSON.stringify(updatedFavoriteJobs)
-        );
-        console.log(updatedFavoriteJobs);
-    };
-
-    const isSaved = (job) => {
-        const favoriteJobs =
-            JSON.parse(localStorage.getItem("favoriteJobs")) || [];
-
-        return favoriteJobs.some((fav) => fav.id === job.id); // Sem conversão desnecessária
     };
 
     return (
@@ -256,41 +294,18 @@ export default function Page() {
             {error && <p className={styles.error}>Erro: {error}</p>}
 
             <div className={styles.results}>
-                {jobs.map((job, index) => (
-                    <div key={index} className={styles.jobCard}>
-                        <h2>{job.title}</h2>
-                        <div className={styles.jobInfo}>
-                            <p>
-                                <strong>Empresa: </strong> {job.company}
-                            </p>
-                            <p>
-                                <strong>Localidade: </strong>s
-                                {job.location || "Não informada"}
-                            </p>
-                            <p>
-                                <strong>Tipo de trabalho: </strong>
-                                {job.job_type || "Não informado"}
-                            </p>
-                            <p>
-                                <strong>Data postada: </strong>
-                                {job.date_posted || "Não informada"}
-                            </p>
-                        </div>
-                        <div className={styles.flexContainer}>
-                            <a
-                                href={job.job_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Ver vaga
-                            </a>
-                            <button onClick={() => handleSave(job)}>
-                                <MdSaveAlt />{" "}
-                                {isSaved(job) ? "Vaga salva" : "Salvar vaga"}
-                            </button>
-                        </div>
+                <h2>Resultados Encontrados:</h2>
+                {jobs.length <= 0 ? (
+                    <p style={{ color: "gray" }}>
+                        Nenhum resultado disponível...
+                    </p>
+                ) : (
+                    <div className={styles.jobsContainer}>
+                        {jobs.map((job, index) => (
+                            <JobCard key={index} job={job} />
+                        ))}
                     </div>
-                ))}
+                )}
             </div>
         </main>
     );

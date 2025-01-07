@@ -210,7 +210,13 @@
 
 .results {
     width: 90%;
-    margin-top: 6rem;
+    margin-top: 3rem;
+    display: grid;
+    gap: 3rem;
+}
+
+.jobsContainer {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
