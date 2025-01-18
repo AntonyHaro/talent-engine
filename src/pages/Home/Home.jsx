@@ -1,39 +1,76 @@
-import { LuBriefcaseBusiness } from "react-icons/lu";
+import { Link } from "react-router-dom";
 import { LuGlasses } from "react-icons/lu";
+import { MdOutlineWorkOutline } from "react-icons/md";
 import styles from "./Home.module.css";
 
-function FeatureCard({ feature, description, iconComponent }) {
+function Feature({ name, description, icon }) {
     return (
-        <div className={styles.featureCard}>
-            <div className={styles.svg}>{iconComponent}</div>
-            <div className={styles.info}>
-                <h2>{feature}</h2>
-                <p className={styles.description}>{description}</p>
-            </div>
-        </div>
+        <Link className={styles.feature}>
+            <h2>
+                {icon} {name}
+            </h2>
+            <p>{description}</p>
+        </Link>
     );
 }
 
 export default function Home() {
     return (
         <main className={styles.home}>
-            <h1 className={styles.title}>Bem vindo ao Talent Engine!</h1>
-            <p style={{ color: "gray" }}>
-                Selecione as opções do cabeçalho para começar a usar nossa
-                ferramenta.
+            <h1>Painel Principal - TalentAI</h1>
+            <p className={styles.info}>
+                Navegue pelas ferramentas inovadoras que criamos para
+                simplificar sua transição de carreira. De buscas inteligentes a
+                análises detalhadas, tudo está aqui para impulsionar o seu
+                sucesso!
             </p>
-            <section className={styles.featureContainer}>
-                <FeatureCard
-                    feature="Job Finder"
-                    description="Encontre as melhores oportunidades de emprego de forma prática e eficiente. Nosso buscador personalizado permite que você defina parâmetros específicos, como localização, área de atuação e palavras-chave. Além disso, realiza buscas em diversas plataformas de emprego, garantindo resultados abrangentes e relevantes para você."
-                    iconComponent={<LuBriefcaseBusiness />}
+            <div className={styles.featureContainer}>
+                <Feature
+                    name="Buscador de Vagas"
+                    description="Encontre vagas ideais com filtros como localização, área e palavras-chave, acessando múltiplas plataformas para resultados personalizados e relevantes."
+                    icon={"💼"}
                 />
-                <FeatureCard
-                    feature="CV Analyzer"
-                    description="Potencialize suas chances de sucesso com o analisador de currículos baseado em Inteligência Artificial. Compare seu currículo com a descrição de uma vaga e receba insights detalhados sobre o nível de compatibilidade. Obtenha sugestões valiosas para destacar suas habilidades e aumentar suas chances de contratação."
-                    iconComponent={<LuGlasses />}
+                <Feature
+                    name="Analisador de Currículos"
+                    description="Avalie seu currículo com IA, comparando-o a vagas para obter insights sobre compatibilidade e sugestões de melhorias."
+                    icon={"👤"}
                 />
-            </section>
+                <Feature
+                    name="Gerador de Perfil Ideal para Vagas"
+                    description="Crie perfis otimizados para se destacar em vagas específicas, com recomendações personalizadas de habilidades e competências."
+                    icon={"😎"}
+                />
+                <Feature
+                    name="Busca de Cargos e Faixa Salarial"
+                    description="Pesquise cargos e descubra faixas salariais atualizadas para entender o mercado e planejar sua carreira."
+                    icon={"📊"}
+                />
+                <Feature
+                    name="Gerador de Profile no LinkedIn"
+                    description="Monte um perfil atraente no LinkedIn, destacando suas habilidades e experiências para impressionar recrutadores."
+                    icon={"👨‍💻"}
+                />
+                <Feature
+                    name="Orientador de Carreiras"
+                    description="Receba orientação personalizada de carreira com insights baseados em tendências de mercado e suas metas profissionais."
+                    icon={"🦾"}
+                />
+                <Feature
+                    name="Match de Cultura Organizacional"
+                    description="Avalie a compatibilidade com a cultura das empresas, alinhando valores e estilo de trabalho. Aumente suas chances de sucesso ao encontrar o ambiente ideal para você."
+                    icon={"🏢"} // Icone representando empresas e cultura organizacional
+                />
+                <Feature
+                    name="Comparador de Vagas"
+                    description="Compare diferentes oportunidades de emprego lado a lado, considerando salário, benefícios, crescimento e outros fatores essenciais para sua escolha."
+                    icon={"⚖️"} // Icone representando equilíbrio ou comparação
+                />
+                <Feature
+                    name="Checar Reputações de Empresas"
+                    description="Pesquise e analise a reputação de empresas com base em avaliações de funcionários e ex-funcionários. Tome decisões informadas sobre onde você quer trabalhar."
+                    icon={"⭐"} // Ícone de estrela, simbolizando avaliações e reputações
+                />
+            </div>
         </main>
     );
 }

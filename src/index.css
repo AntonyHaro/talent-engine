@@ -21,7 +21,7 @@ body,
 #root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding: 4rem;
+    padding: 5rem;
     color: var(--text);
     display: flex !important;
     flex-direction: column;
@@ -30,11 +30,10 @@ body,
 }
 
 main {
-    margin-top: 4rem;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     gap: 2rem;
 }
 
@@ -43,9 +42,4 @@ main {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-}
-
-a {
-    color: hsl(214, 59%, 43%);
-    text-decoration: none;
 }
