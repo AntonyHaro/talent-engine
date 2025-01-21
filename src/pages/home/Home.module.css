@@ -1,3 +1,7 @@
+.title {
+    color: black;
+}
+
 .info {
     color: gray;
     margin-bottom: 1%;
@@ -28,7 +32,7 @@
 }
 
 .feature h2 {
-    color: hsl(206, 5%, 26%);
+    color: hsl(210, 15%, 10%);
 }
 
 .feature p {

@@ -3,9 +3,9 @@ import { LuGlasses } from "react-icons/lu";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import styles from "./Home.module.css";
 
-function Feature({ name, description, icon }) {
+function Feature({ name, description, icon, link }) {
     return (
-        <Link className={styles.feature}>
+        <Link className={styles.feature} to={link}>
             <h2>
                 {icon} {name}
             </h2>
@@ -17,7 +17,7 @@ function Feature({ name, description, icon }) {
 export default function Home() {
     return (
         <main className={styles.home}>
-            <h1>Painel Principal - TalentAI</h1>
+            <h1 className={styles.title}>Painel Principal - TalentAI</h1>
             <p className={styles.info}>
                 Navegue pelas ferramentas inovadoras que criamos para
                 simplificar sua transição de carreira. De buscas inteligentes a
@@ -29,6 +29,7 @@ export default function Home() {
                     name="Buscador de Vagas"
                     description="Encontre vagas ideais com filtros como localização, área e palavras-chave, acessando múltiplas plataformas para resultados personalizados e relevantes."
                     icon={"💼"}
+                    link={"/job-finder"}
                 />
                 <Feature
                     name="Analisador de Currículos"

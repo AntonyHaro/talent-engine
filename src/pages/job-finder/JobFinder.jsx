@@ -1,3 +1,5 @@
+import { useState } from "react";
+import ReturnHome from "../../components/return-home/ReturnHome";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
@@ -5,8 +7,6 @@ import { LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
-
-import { useState } from "react";
 import styles from "./JobFinder.module.css";
 
 function JobCard({ job }) {
@@ -77,7 +77,6 @@ function JobCard({ job }) {
                     Ver vaga
                 </a>
                 <button onClick={() => handleSave(job)}>
-                    {/* {saved ?  : < />} */}
                     {saved ? (
                         <>
                             <FaStar /> Vaga salva
@@ -93,11 +92,11 @@ function JobCard({ job }) {
     );
 }
 
-export default function Page() {
+export default function JobFinder() {
     const [formData, setFormData] = useState({
         searchTerm: "",
         location: "",
-        siteName: "indeed",
+        siteName: "linkedin",
         resultsWanted: 20,
         isRemote: false,
         jobType: "fulltime",
@@ -150,62 +149,68 @@ export default function Page() {
 
     return (
         <main className={styles.jobs}>
+            <ReturnHome />
             <h1 className={styles.title}>
-                <div className={styles.svg}>
+                {/* <div className={styles.svg}>
                     <LuBriefcaseBusiness />
-                </div>
-                Buscador de Vagas
+                </div> */}
+                💼 Buscador de Vagas
             </h1>
             <p style={{ color: "gray", marginBottom: "3%" }}>
                 Selecione os filtros que deseja para buscar vagas com parâmetros
                 personalizados.
             </p>
             <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.formGroup}>
-                    <label htmlFor="searchTerm">
-                        <div className={styles.icon}>
-                            <IoMdSearch />
-                        </div>
-                        Palavras-chave
-                    </label>
-                    <input
-                        type="text"
-                        id="searchTerm"
-                        name="searchTerm"
-                        value={formData.searchTerm}
-                        placeholder="Palavras-chave:"
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label htmlFor="location">
-                        <div className={styles.icon}>
-                            <MdOutlineLocationOn />
-                        </div>
-                        Localização
-                    </label>
-                    <div className={styles.multiColumn}>
+                <div className={styles.multiColumn}>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="searchTerm">
+                            <div className={styles.icon}>
+                                <IoMdSearch />
+                            </div>
+                            Palavras-chave
+                        </label>
                         <input
                             type="text"
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            placeholder="Localização:"
+                            id="searchTerm"
+                            name="searchTerm"
+                            value={formData.searchTerm}
+                            placeholder="Palavras-chave:"
                             onChange={handleChange}
                             required
                         />
-                        <label htmlFor="isRemote" className={styles.isRemote}>
-                            Trabalho Remoto?
-                            <input
-                                type="checkbox"
-                                id="isRemote"
-                                name="isRemote"
-                                checked={formData.isRemote}
-                                onChange={handleChange}
-                            />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                        <label htmlFor="location">
+                            <div className={styles.icon}>
+                                <MdOutlineLocationOn />
+                            </div>
+                            Localização
                         </label>
+                        <div className={styles.multiColumn}>
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                value={formData.location}
+                                placeholder="Localização:"
+                                onChange={handleChange}
+                                required
+                            />
+                            <label
+                                htmlFor="isRemote"
+                                className={styles.isRemote}
+                            >
+                                Trabalho Remoto?
+                                <input
+                                    type="checkbox"
+                                    id="isRemote"
+                                    name="isRemote"
+                                    checked={formData.isRemote}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -223,7 +228,6 @@ export default function Page() {
                             value={formData.siteName}
                             onChange={handleChange}
                         >
-                            <option value="indeed">Indeed</option>
                             <option value="linkedin">LinkedIn</option>
                             <option value="glassdoor">Glassdoor</option>
                         </select>
@@ -248,13 +252,7 @@ export default function Page() {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label>
-                        <div className={styles.icon}>
-                            <LuBriefcaseBusiness />
-                        </div>
-                        Tipo de Trabalho
-                    </label>
-                    <div className={styles.multiColumn}>
+                    <div className={styles.jobFormat}>
                         {["fulltime", "parttime", "internship", "contract"].map(
                             (type) => (
                                 <label
@@ -290,9 +288,7 @@ export default function Page() {
                     {loading ? "Buscando..." : "Buscar Vagas!"}
                 </button>
             </form>
-
             {error && <p className={styles.error}>Erro: {error}</p>}
-
             <div className={styles.results}>
                 <h2>Resultados Encontrados:</h2>
                 {jobs.length <= 0 ? (

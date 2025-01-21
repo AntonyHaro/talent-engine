@@ -1,19 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import JobFinder from "./pages/JobFinder/JobFinder";
-import Curriculum from "./pages/Curriculum/Curriculum";
-import Home from "./pages/Home/Home";
-import Header from "./components/Header/Header";
-import "./App.css";
+import JobFinder from "./pages/job-finder/JobFinder";
+import CurriculumAnalyzer from "./pages/curriculum-analyzer/CurriculumAnalyzer"
+import Home from "./pages/home/Home";
 
 function App() {
     return (
         <div>
-            {/* <Header /> */}
-
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/jobs" element={<JobFinder />} />
-                <Route path="/cv" element={<Curriculum />} />
+                <Route path="/job-finder" element={<JobFinder />} />
+                <Route path="/cv-analyzer" element={<CurriculumAnalyzer />} />
             </Routes>
         </div>
     );

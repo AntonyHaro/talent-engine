@@ -4,7 +4,8 @@
     --text: hsl(210, 7%, 10%);
     --border: gray;
     --input-bgc: hsl(210, 7%, 87%);
-    --primary-color: hsl(210, 42%, 25%);
+    --primary-color: hsl(210, 5%, 15%);
+    /* --primary-color: hsl(210, 42%, 25%); */
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -23,17 +24,16 @@ body,
     -moz-osx-font-smoothing: grayscale;
     padding: 5rem;
     color: var(--text);
-    display: flex !important;
+    /* display: flex !important;
     flex-direction: column;
     align-items: center;
-    gap: 6rem;
+    gap: 6rem; */
 }
 
 main {
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     gap: 2rem;
 }
 
