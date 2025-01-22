@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReturnHome from "../../components/return-home/ReturnHome";
+import SubmitButton from "../../components/submit-button/SubmitButton";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
@@ -150,12 +151,7 @@ export default function JobFinder() {
     return (
         <main className={styles.jobs}>
             <ReturnHome />
-            <h1 className={styles.title}>
-                {/* <div className={styles.svg}>
-                    <LuBriefcaseBusiness />
-                </div> */}
-                💼 Buscador de Vagas
-            </h1>
+            <h1 className={styles.title}>💼 Buscador de Vagas</h1>
             <p style={{ color: "gray", marginBottom: "3%" }}>
                 Selecione os filtros que deseja para buscar vagas com parâmetros
                 personalizados.
@@ -280,13 +276,19 @@ export default function JobFinder() {
                     </div>
                 </div>
 
-                <button
+                <SubmitButton
+                    text={"Buscar Vagas!"}
+                    loadingMessage={"Buscando..."}
+                    loading={loading}
+                />
+
+                {/* <button
                     type="submit"
                     className={styles.button}
                     disabled={loading}
                 >
                     {loading ? "Buscando..." : "Buscar Vagas!"}
-                </button>
+                </button> */}
             </form>
             {error && <p className={styles.error}>Erro: {error}</p>}
             <div className={styles.results}>

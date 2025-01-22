@@ -1,11 +1,41 @@
 .title {
-    color: black;
+    color: var(--primary-color);
 }
 
 .info {
     color: gray;
     margin-bottom: 1%;
     line-height: 1.5;
+}
+
+.filterContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+}
+
+.filterItem {
+    padding: 0.75rem;
+    /* background-color: hsl(210, 5%, 87%); */
+    border-radius: 4px;
+    transition: 0.2s ease-out;
+    border: 1px solid gray;
+    color: gray;
+}
+
+.filterItem:not(.activeFilter):hover {
+    cursor: pointer;
+    transform: translateY(-0.2rem);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.activeFilter {
+    border-color: var(--primary-color);
+    color: white;
+    background-color: var(--primary-color);
+    margin-bottom: 0.8rem;
 }
 
 .featureContainer {

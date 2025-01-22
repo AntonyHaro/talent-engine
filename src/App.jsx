@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import JobFinder from "./pages/job-finder/JobFinder";
-import CurriculumAnalyzer from "./pages/curriculum-analyzer/CurriculumAnalyzer"
 import Home from "./pages/home/Home";
+import JobFinder from "./pages/job-finder/JobFinder";
+import CvAnalyzer from "./pages/cv-analyzer/CvAnalyzer";
+import JobComparator from "./pages/job-comparator/JobComparator";
 
 function App() {
     return (
@@ -9,7 +10,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/job-finder" element={<JobFinder />} />
-                <Route path="/cv-analyzer" element={<CurriculumAnalyzer />} />
+                <Route path="/cv-analyzer" element={<CvAnalyzer />} />
+                <Route path="/job-comparator" element={<JobComparator />} />
             </Routes>
         </div>
     );

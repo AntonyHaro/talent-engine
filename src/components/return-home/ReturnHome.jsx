@@ -1,20 +1,11 @@
 import { Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import styles from "./ReturnHome.module.css";
 
 export default function ReturnHome() {
     return (
-        <Link
-            to={"/"}
-            style={{
-                color: "gray",
-                width: "fit-content",
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.4rem",
-            }}
-        >
-            <IoArrowBack /> Voltar ao painel principal
+        <Link to={"/"} className={styles.link}>
+            <IoArrowBack /> <span>Voltar ao painel principal</span>
         </Link>
     );
 }

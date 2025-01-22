@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { LuGlasses } from "react-icons/lu";
-import styles from "./CurriculumAnalyzer.module.css";
+import styles from "./CvAnalyzer.module.css";
 import ReactMarkdown from "react-markdown";
 
-export default function CurriculumAnalyzer() {
+export default function CvAnalyzer() {
     const [file, setFile] = useState(null);
     const [job, setJob] = useState("");
     const [loading, setLoading] = useState(false);
