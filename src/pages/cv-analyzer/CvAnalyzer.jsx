@@ -18,7 +18,7 @@ export default function CvAnalyzer() {
         setJob(event.target.value);
     };
 
-    const uploadAndSummarizePDF = async () => {
+    const handleAnalyzer = async () => {
         if (!file) {
             alert("Nenhum arquivo selecionado.");
             return;
@@ -71,7 +71,7 @@ export default function CvAnalyzer() {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    uploadAndSummarizePDF();
+                    handleAnalyzer();
                 }}
                 className={styles.form}
             >

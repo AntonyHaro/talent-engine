@@ -1,5 +1,11 @@
 import { useState } from "react";
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import ReturnHome from "../../components/return-home/ReturnHome";
+import SubmitButton from "../../components/submit-button/SubmitButton";
+
 import { MdOutlineSubtitles } from "react-icons/md"; //job title
 import { RiMoneyDollarCircleLine } from "react-icons/ri"; //salary
 import { FiMapPin } from "react-icons/fi"; //local
@@ -13,6 +19,9 @@ export default function JobComparator() {
         { title: "", salary: "", location: "", benefits: "", culture: "" },
         { title: "", salary: "", location: "", benefits: "", culture: "" },
     ]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [comparasion, setComparasion] = useState(null);
 
     const handleJobChange = (index, field, value) => {
         const updatedJobs = [...jobs];
@@ -32,6 +41,42 @@ export default function JobComparator() {
             { title: "", salary: "", location: "", benefits: "", culture: "" },
             { title: "", salary: "", location: "", benefits: "", culture: "" },
         ]);
+    };
+
+    const handleComparator = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch("/api/gemini", {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    message: `Crie uma tabela em formato MarkDown, discutindo os prós e contras entre 5 linguagens de programação, siga o seguinte formato para a tabela:
+                                | Coluna 1 | Coluna 2 | Coluna 3 |
+                                |---|---|---|
+                                | Célula 1-1 | Célula 1-2 | Célula 1-3 |
+                                | Célula 2-1 | Célula 2-2 | Célula 2-3 |
+                                | Célula 3-1 | Célula 3-2 | Célula 3-3 |`,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Erro no servidor.");
+            }
+
+            const data = await response.json();
+            setComparasion(
+                data.response || "Nenhuma resposta válida recebida."
+            );
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+
+        console.log(comparasion);
     };
 
     return (
@@ -131,6 +176,14 @@ export default function JobComparator() {
             </div>
 
             <div className={styles.actions}>
+                <SubmitButton
+                    text={"Fazer Comparação"}
+                    loadingMessage={"Carregando..."}
+                    loading={loading}
+                    width={"30%"}
+                    // onClick={handleComparator} arrumar isto dentro do componente, adicionando a propriedade onClick diretamente no <button>
+                />
+                <button onClick={handleComparator}>Teste</button>
                 <button className={styles.addButton} onClick={addJob}>
                     Adicionar Vaga
                 </button>
@@ -140,6 +193,12 @@ export default function JobComparator() {
                 >
                     Reiniciar Comparação
                 </button>
+            </div>
+
+            <div className={styles.comparisonTable}>
+                <ReactMarkdown remarkPlugins={remarkGfm}>
+                    {comparasion}
+                </ReactMarkdown>
             </div>
 
             <table className={styles.comparisonTable}>

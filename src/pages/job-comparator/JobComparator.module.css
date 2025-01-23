@@ -1,6 +1,6 @@
 .jobForms {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
 }
@@ -11,7 +11,12 @@
     border-radius: 5px;
     background: #f9f9f9;
     flex: 1 1 calc(50% - 1rem);
-    min-width: 300px;
+    min-width: 500px;
+    transition: 0.2s ease-out;
+}
+
+.jobForm:hover {
+    border-color: gray;
 }
 
 .jobForm h3 {
@@ -79,7 +84,13 @@
 
 .addButton {
     background-color: var(--primary-color);
+    font-weight: bold;
     color: white;
+    transition: 0.2s;
+}
+
+.addButton:hover {
+    transform: translateY(-0.2rem);
 }
 
 .resetButton {
@@ -102,3 +113,4 @@
 .comparisonTable th {
     background-color: #f1f1f1;
 }
+

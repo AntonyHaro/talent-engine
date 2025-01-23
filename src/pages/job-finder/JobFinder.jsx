@@ -280,6 +280,7 @@ export default function JobFinder() {
                     text={"Buscar Vagas!"}
                     loadingMessage={"Buscando..."}
                     loading={loading}
+                    width={"50%"}
                 />
 
                 {/* <button

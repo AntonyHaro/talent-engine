@@ -1,8 +1,13 @@
 import styles from "./SubmitButton.module.css";
 
-export default function SubmitButton({ text, loadingMessage, loading }) {
+export default function SubmitButton({ text, loadingMessage, loading, width }) {
     return (
-        <button type="submit" className={styles.button} disabled={loading}>
+        <button
+            type="submit"
+            className={styles.button}
+            style={{ width: width }}
+            disabled={loading}
+        >
             {loading ? loadingMessage : text}
         </button>
     );
