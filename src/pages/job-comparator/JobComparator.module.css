@@ -16,7 +16,7 @@
 }
 
 .jobForm:hover {
-    border-color: gray;
+    border-color: hsl(0, 0%, 70%);
 }
 
 .jobForm h3 {
@@ -49,13 +49,12 @@
 .input:hover {
     color: var(--primary-color);
 
-    input {
-        /* border-color: var(--primary-color); */
+    input, textarea {
         border-color: gray;
     }
 }
 
-.input input {
+.input input, .input textarea {
     width: 100%;
     padding: 0.7rem 1rem;
     border: 1px solid lightgray;
@@ -64,7 +63,7 @@
     transition: 0.2s ease-out;
 }
 
-.input input:focus {
+.input input:focus, .input textarea:focus {
     border-color: gray;
 }
 
@@ -98,19 +97,45 @@
     color: gray;
 }
 
-.comparisonTable {
+.comparisonTable,
+.output table {
     width: 100%;
-    border-collapse: collapse;
+    border-spacing: 0.7rem;
+    /* border-collapse: collapse; */
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .comparisonTable th,
-.comparisonTable td {
+.comparisonTable td,
+.output th,
+.output td {
     border: 1px solid lightgray;
     padding: 1rem;
     text-align: left;
+    transition: 0.2s ease-out;
 }
 
-.comparisonTable th {
-    background-color: #f1f1f1;
+.comparisonTable td:hover, .output td:hover {
+    border-color: gray;
 }
 
+.comparisonTable th,
+.output th {
+    background-color: hsl(0, 0%, 87%);
+}
+
+.comparisonTable thead th:first-child,
+.output thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.comparisonTable thead th:last-child,
+.output thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.comparisonTable tbody td,
+.output tbody td {
+    border-radius: 5px;
+}
