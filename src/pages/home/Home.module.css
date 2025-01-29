@@ -19,7 +19,7 @@
     padding: 0.75rem;
     /* background-color: hsl(210, 5%, 87%); */
     border-radius: 4px;
-    transition: 0.2s ease-out;
+    transition: 0.2s ease;
     border: 1px solid gray;
     color: gray;
 }

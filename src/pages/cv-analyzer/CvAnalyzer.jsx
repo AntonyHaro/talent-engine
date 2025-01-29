@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { LuGlasses } from "react-icons/lu";
+
+import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
+import ReturnHome from "../../components/return-home/ReturnHome";
+import SubmitButton from "../../components/submit-button/SubmitButton";
+
+import { FaPerson } from "react-icons/fa6";
+import { IoPersonSharp, IoPersonOutline } from "react-icons/io5";
+import { MdOutlinePersonOutline } from "react-icons/md";
+
 import styles from "./CvAnalyzer.module.css";
-import ReactMarkdown from "react-markdown";
 
 export default function CvAnalyzer() {
     const [file, setFile] = useState(null);
     const [job, setJob] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [output, setOutput] = useState("");
+    const [analysis, setAnalysis] = useState("");
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -18,7 +25,7 @@ export default function CvAnalyzer() {
         setJob(event.target.value);
     };
 
-    const handleAnalyzer = async () => {
+    const handleAnalysis = async () => {
         if (!file) {
             alert("Nenhum arquivo selecionado.");
             return;
@@ -57,50 +64,61 @@ export default function CvAnalyzer() {
     };
 
     return (
-        <main className={styles.cv}>
+        <main className={styles.cvAnalyzer}>
+            <ReturnHome />
             <h1 className={styles.title}>
-                <div className={styles.svg}>
-                    <LuGlasses />
-                </div>
-                Analisador de Currículos
+                👤 Analisador de Currículos Profissionais
             </h1>
-            <p style={{ color: "gray", marginBottom: "3%" }}>
+            <p>
                 Adicione o currículo e as informações da vaga para inciar a
                 análise com a Inteligência Artificial.
             </p>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    handleAnalyzer();
+                    handleAnalysis();
                 }}
                 className={styles.form}
             >
-                <input
-                    type="file"
-                    id="file-input"
-                    name="file-input"
-                    onChange={handleFileChange}
-                    className={styles.fileInput}
+                <div className={styles.cvForms}>
+                    <div className={styles.cvForm}>
+                        <h3>
+                            <MdOutlinePersonOutline /> Candidato 1
+                        </h3>
+                        <div className={styles.input}>
+                            <p>
+                                Anexe o currículo do candidato no formato PDF:
+                            </p>
+                            <input
+                                type="file"
+                                id="file-input"
+                                name="file-input"
+                                onChange={handleFileChange}
+                                className={styles.fileInput}
+                            />
+                        </div>
+                        <div className={styles.input}>
+                            <textarea
+                                value={job}
+                                onChange={handleJobChange}
+                                placeholder="Obervações do candidato (opcional):"
+                                style={{ height: "100px", resize: "vertical" }}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <SubmitButton
+                    text={"Carregar Análise"}
+                    loadingMessage={"Carregando..."}
+                    loading={loading}
+                    width={"30%"}
                 />
-                <textarea
-                    value={job}
-                    onChange={handleJobChange}
-                    placeholder="Insira a descrição da vaga aqui..."
-                />
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={styles.button}
-                >
-                    {loading ? "Carregando..." : "Carregar análise!"}
-                </button>
             </form>
 
             {error && <p className={styles.error}>Erro: {error}</p>}
 
-            <div className={styles.output}>
-                <ReactMarkdown>{output}</ReactMarkdown>
-            </div>
+            <MarkdownComponent>{analysis}</MarkdownComponent>
         </main>
     );
 }

@@ -21,6 +21,7 @@
 
 .jobForm h3 {
     margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
 }
 
 .inputContainer {

@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-
 import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
 
 import ReturnHome from "../../components/return-home/ReturnHome";
@@ -90,7 +87,10 @@ export default function JobComparator() {
             <div className={styles.jobForms}>
                 {jobs.map((job, index) => (
                     <div key={index} className={styles.jobForm}>
-                        <h3>Vaga {index + 1}</h3>
+                        <h3>
+                            Vaga {index + 1}
+                            {job.title != "" ? ` - ${job.title}` : ""}
+                        </h3>
                         <div className={styles.inputContainer}>
                             {/* Título da vaga */}
                             <div className={styles.input}>
