@@ -1,14 +1,14 @@
 import { useState } from "react";
+import axios from "axios";
 
 import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
 import ReturnHome from "../../components/return-home/ReturnHome";
 import SubmitButton from "../../components/submit-button/SubmitButton";
 
-import { FaPerson } from "react-icons/fa6";
-import { IoPersonSharp, IoPersonOutline } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
 
 import styles from "./CvAnalyzer.module.css";
+
 
 export default function CvAnalyzer() {
     const [file, setFile] = useState(null);
@@ -38,26 +38,27 @@ export default function CvAnalyzer() {
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("job", job);
+        formData.append("message", job);
 
         setLoading(true);
         setError(null);
+        setAnalysis(null);
 
         try {
-            const response = await fetch("/api/cv/", {
-                method: "POST",
-                body: formData,
-            });
+            const { data } = await axios.post(
+                "http://localhost:5000/cv-analyzer",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || "Erro no servidor.");
-            }
-
-            const data = await response.json();
-            setOutput(data.response || "Nenhuma resposta válida recebida.");
-        } catch (err) {
-            setError(err.message);
+            setAnalysis(data.response);
+        } catch (error) {
+            console.log(error);
+            setError(error || "Erro ao conectar com o servidor");
         } finally {
             setLoading(false);
         }
