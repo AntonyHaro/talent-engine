@@ -42,7 +42,7 @@ export default function Home() {
 
     const features = [
         {
-            name: "Buscador de Exploração de Vagas e Mercado",
+            name: "Explorador de Vagas e Mercado",
             description:
                 "Encontre Exploração de Vagas e Mercado ideais com filtros como localização, área e palavras-chave, acessando múltiplas plataformas para resultados personalizados e relevantes.",
             icon: "💼",
@@ -66,7 +66,7 @@ export default function Home() {
             category: "Personalização de Perfil Profissional",
         },
         {
-            name: "Gerador de Perfil Ideal para Exploração de Vagas e Mercado",
+            name: "Gerador de Perfil Ideal para Vagas e Mercado",
             description:
                 "Crie perfis otimizados para se destacar em Exploração de Vagas e Mercado específicas, com recomendações personalizadas de habilidades e competências.",
             icon: "😎",

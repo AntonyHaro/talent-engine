@@ -16,11 +16,6 @@
     transition: 0.2s ease-out;
 }
 
-.unique {
-    /* max-width: 50%; */
-    width: 100%;
-}
-
 .cvForm:hover {
     border-color: hsl(0, 0%, 70%);
 }
@@ -37,46 +32,36 @@
 }
 
 .inputContainer {
+    margin-top: 2%;
     display: grid;
-    gap: 0.65rem;
-}
-
-.multiColumn {
-    margin: 1.1rem 0;
-    width: 100%;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .input {
     flex: 1;
     display: grid;
-    gap: 0.7rem;
-    /* font-size: 1.5em; */
+    gap: 1rem;
     color: gray;
     transition: 0.2s ease-out;
 
     p {
         margin-bottom: 0.9rem;
     }
+
+    input[type="text"] {
+        width: 60%;
+    }
 }
 
 .input:hover {
     color: var(--primary-color);
 
-    input,
-    textarea {
-        border-color: gray;
-    }
-
     input {
-        cursor: pointer;
+        border-color: gray;
     }
 }
 
-.input input,
-.input textarea {
+.input input {
     width: 100%;
     padding: 0.7rem 1rem;
     border: 1px solid lightgray;
@@ -85,14 +70,14 @@
     transition: 0.2s ease-out;
 }
 
-.input input {
+.input input[type="file"] {
     border-style: dashed;
     border-width: 2px;
     margin-bottom: 0.4rem;
+    cursor: pointer;
 }
 
-.input input:focus,
-.input textarea:focus {
+.input input:focus {
     border-color: gray;
 }
 

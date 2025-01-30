@@ -167,8 +167,9 @@ export default function JobComparator() {
                     Reiniciar Comparação
                 </button>
             </div>
-
-            <MarkdownComponent>{comparison}</MarkdownComponent>
+            
+            {error && <p className={styles.error}>Erro: {error}</p>}
+            {comparison && <MarkdownComponent>{comparison}</MarkdownComponent>}
         </main>
     );
 }

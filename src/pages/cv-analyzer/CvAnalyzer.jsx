@@ -18,10 +18,8 @@ export default function CvAnalyzer() {
     const fileInputRefs = useRef([]);
 
     const resetAnalysis = () => {
-        setCvFiles([]);
+        setCvFiles([null]);
         setJob("");
-        setAnalysis("");
-        setError(null);
         fileInputRefs.current.forEach((ref) => {
             if (ref) ref.value = "";
         });
@@ -35,10 +33,6 @@ export default function CvAnalyzer() {
         const newFiles = [...cvFiles];
         newFiles[index] = { file: event.target.files[0] };
         setCvFiles(newFiles);
-    };
-
-    const handleJobChange = (event) => {
-        setJob(event.target.value);
     };
 
     const handleAnalysis = async () => {
@@ -97,30 +91,31 @@ export default function CvAnalyzer() {
             </p>
             <div className={styles.cvForms}>
                 {cvFiles.map((cv, index) => (
-                    <div
-                        key={index}
-                        className={`${styles.cvForm} ${
-                            cvFiles.length === 1 ? styles.unique : ""
-                        }`}
-                    >
+                    <div key={index} className={styles.cvForm}>
                         <h3>
                             <MdOutlinePersonOutline /> Candidato {index + 1}
                         </h3>
-                        <div className={styles.input}>
-                            <p>
-                                Anexe o currículo do candidato no formato PDF:
-                            </p>
-                            <input
-                                type="file"
-                                name={`file-input-${index}`}
-                                onChange={(event) =>
-                                    handleFileChange(event, index)
-                                }
-                                className={styles.fileInput}
-                                ref={(el) =>
-                                    (fileInputRefs.current[index] = el)
-                                }
-                            />
+                        <p>Anexe o currículo do candidato no formato PDF:</p>
+                        <div className={styles.inputContainer}>
+                            <div className={styles.input}>
+                                <input
+                                    type="text"
+                                    placeholder="Nome do candidato:"
+                                />
+                            </div>
+                            <div className={styles.input}>
+                                <input
+                                    type="file"
+                                    name={`file-input-${index}`}
+                                    onChange={(event) =>
+                                        handleFileChange(event, index)
+                                    }
+                                    className={styles.fileInput}
+                                    ref={(el) =>
+                                        (fileInputRefs.current[index] = el)
+                                    }
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -147,7 +142,7 @@ export default function CvAnalyzer() {
 
             {error && <p className={styles.error}>Erro: {error}</p>}
 
-            <MarkdownComponent>{analysis}</MarkdownComponent>
+            {analysis && <MarkdownComponent>{analysis}</MarkdownComponent>}
         </main>
     );
 }
