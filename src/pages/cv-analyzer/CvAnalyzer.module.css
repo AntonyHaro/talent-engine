@@ -1,6 +1,7 @@
 .cvForms {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin-bottom: 2rem;
 }
@@ -12,9 +13,12 @@
     background: #f9f9f9;
     display: grid;
     gap: 1rem;
-    min-width: 500px;
-    max-width: 50%;
     transition: 0.2s ease-out;
+}
+
+.unique {
+    /* max-width: 50%; */
+    width: 100%;
 }
 
 .cvForm:hover {
@@ -22,7 +26,7 @@
 }
 
 .cvForm h3 {
-    margin-bottom: 1.1rem;
+    margin-bottom: 1rem;
     display: flex;
     gap: 0.5rem;
     align-items: center;
@@ -52,6 +56,10 @@
     /* font-size: 1.5em; */
     color: gray;
     transition: 0.2s ease-out;
+
+    p {
+        margin-bottom: 0.9rem;
+    }
 }
 
 .input:hover {

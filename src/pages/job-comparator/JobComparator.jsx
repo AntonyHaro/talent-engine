@@ -158,7 +158,7 @@ export default function JobComparator() {
                     onClick={handleComparator}
                 />
                 <button className={styles.addButton} onClick={addJob}>
-                    Adicionar Vaga
+                    + Vaga
                 </button>
                 <button
                     className={styles.resetButton}

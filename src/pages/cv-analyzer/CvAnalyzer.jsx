@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 
 import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
@@ -9,16 +9,32 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 
 import styles from "./CvAnalyzer.module.css";
 
-
 export default function CvAnalyzer() {
-    const [file, setFile] = useState(null);
+    const [cvFiles, setCvFiles] = useState([{ file: null }]);
     const [job, setJob] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [analysis, setAnalysis] = useState("");
+    const fileInputRefs = useRef([]);
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
+    const resetAnalysis = () => {
+        setCvFiles([]);
+        setJob("");
+        setAnalysis("");
+        setError(null);
+        fileInputRefs.current.forEach((ref) => {
+            if (ref) ref.value = "";
+        });
+    };
+
+    const addCvForm = () => {
+        setCvFiles([...cvFiles, { file: null }]);
+    };
+
+    const handleFileChange = (event, index) => {
+        const newFiles = [...cvFiles];
+        newFiles[index] = { file: event.target.files[0] };
+        setCvFiles(newFiles);
     };
 
     const handleJobChange = (event) => {
@@ -26,19 +42,23 @@ export default function CvAnalyzer() {
     };
 
     const handleAnalysis = async () => {
-        if (!file) {
-            alert("Nenhum arquivo selecionado.");
+        if (cvFiles.length === 0 || cvFiles.some((cv) => !cv.file)) {
+            alert("Selecione pelo menos um arquivo de currículo.");
             return;
         }
 
-        if (!file.name.endsWith(".pdf")) {
-            alert("Somente arquivos PDF são suportados.");
+        if (cvFiles.some((cv) => !cv.file.name.endsWith(".pdf"))) {
+            alert("Todos os arquivos devem estar no formato PDF.");
             return;
         }
 
         const formData = new FormData();
-        formData.append("file", file);
-        formData.append("message", job);
+        cvFiles.forEach((cv, index) => {
+            formData.append(`file`, cv.file);
+            console.log(cv.file);
+        });
+
+        // formData.append("message", job);
 
         setLoading(true);
         setError(null);
@@ -55,6 +75,7 @@ export default function CvAnalyzer() {
                 }
             );
 
+            console.log(data);
             setAnalysis(data.response);
         } catch (error) {
             console.log(error);
@@ -71,20 +92,19 @@ export default function CvAnalyzer() {
                 👤 Analisador de Currículos Profissionais
             </h1>
             <p>
-                Adicione o currículo e as informações da vaga para inciar a
+                Adicione currículos e as informações da vaga para iniciar a
                 análise com a Inteligência Artificial.
             </p>
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    handleAnalysis();
-                }}
-                className={styles.form}
-            >
-                <div className={styles.cvForms}>
-                    <div className={styles.cvForm}>
+            <div className={styles.cvForms}>
+                {cvFiles.map((cv, index) => (
+                    <div
+                        key={index}
+                        className={`${styles.cvForm} ${
+                            cvFiles.length === 1 ? styles.unique : ""
+                        }`}
+                    >
                         <h3>
-                            <MdOutlinePersonOutline /> Candidato 1
+                            <MdOutlinePersonOutline /> Candidato {index + 1}
                         </h3>
                         <div className={styles.input}>
                             <p>
@@ -92,30 +112,38 @@ export default function CvAnalyzer() {
                             </p>
                             <input
                                 type="file"
-                                id="file-input"
-                                name="file-input"
-                                onChange={handleFileChange}
+                                name={`file-input-${index}`}
+                                onChange={(event) =>
+                                    handleFileChange(event, index)
+                                }
                                 className={styles.fileInput}
-                            />
-                        </div>
-                        <div className={styles.input}>
-                            <textarea
-                                value={job}
-                                onChange={handleJobChange}
-                                placeholder="Obervações do candidato (opcional):"
-                                style={{ height: "100px", resize: "vertical" }}
+                                ref={(el) =>
+                                    (fileInputRefs.current[index] = el)
+                                }
                             />
                         </div>
                     </div>
-                </div>
-
+                ))}
+            </div>
+            <div className={styles.actions}>
                 <SubmitButton
                     text={"Carregar Análise"}
                     loadingMessage={"Carregando..."}
                     loading={loading}
                     width={"30%"}
+                    onClick={handleAnalysis}
                 />
-            </form>
+                <button className={styles.addButton} onClick={addCvForm}>
+                    + Candidato
+                </button>
+                <button
+                    type="button"
+                    className={styles.resetButton}
+                    onClick={resetAnalysis}
+                >
+                    Limpar Campos
+                </button>
+            </div>
 
             {error && <p className={styles.error}>Erro: {error}</p>}
 
