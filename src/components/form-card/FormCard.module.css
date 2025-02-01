@@ -1,0 +1,18 @@
+.formCard {
+    border: 2px solid lightgray;
+    padding: 1.8rem;
+    border-radius: 5px;
+    background: #f9f9f9;
+    flex: 1 1 calc(50% - 1rem);
+    min-width: 500px;
+    transition: 0.2s ease-out;
+}
+
+.formCard:hover {
+    border-color: hsl(0, 0%, 70%);
+}
+
+.formCard h3 {
+    margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
+}

@@ -4,6 +4,7 @@ import MarkdownComponent from "../../components/markdown-component/MarkdownCompo
 
 import ReturnHome from "../../components/return-home/ReturnHome";
 import SubmitButton from "../../components/submit-button/SubmitButton";
+import FormCard from "../../components/form-card/FormCard";
 
 import { MdOutlineSubtitles } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
@@ -18,7 +19,7 @@ export default function JobComparator() {
     ]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [comparison, setComparasion] = useState(null);
+    const [comparison, setComparison] = useState(null);
 
     const handleJobChange = (index, field, value) => {
         const updatedJobs = [...jobs];
@@ -66,9 +67,7 @@ export default function JobComparator() {
             }
 
             const data = await response.json();
-            setComparasion(
-                data.response || "Nenhuma resposta válida recebida."
-            );
+            setComparison(data.response || "Nenhuma resposta válida recebida.");
         } catch (error) {
             setError(error.message);
         } finally {
@@ -86,13 +85,12 @@ export default function JobComparator() {
             </p>
             <div className={styles.jobForms}>
                 {jobs.map((job, index) => (
-                    <div key={index} className={styles.jobForm}>
+                    <FormCard key={index}>
                         <h3>
                             Vaga {index + 1}
                             {job.title != "" ? ` - ${job.title}` : ""}
                         </h3>
                         <div className={styles.inputContainer}>
-                            {/* Título da vaga */}
                             <div className={styles.input}>
                                 <PiChatCenteredDotsBold />
                                 <input
@@ -146,7 +144,7 @@ export default function JobComparator() {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </FormCard>
                 ))}
             </div>
             <div className={styles.actions}>
@@ -167,7 +165,7 @@ export default function JobComparator() {
                     Reiniciar Comparação
                 </button>
             </div>
-            
+
             {error && <p className={styles.error}>Erro: {error}</p>}
             {comparison && <MarkdownComponent>{comparison}</MarkdownComponent>}
         </main>

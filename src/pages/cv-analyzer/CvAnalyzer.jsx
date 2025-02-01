@@ -60,7 +60,7 @@ export default function CvAnalyzer() {
 
         try {
             const { data } = await axios.post(
-                "http://localhost:5000/cv-analyzer",
+                "/api/cv-analyzer",
                 formData,
                 {
                     headers: {

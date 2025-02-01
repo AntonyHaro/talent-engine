@@ -70,6 +70,7 @@ export default function Home() {
             description:
                 "Crie perfis otimizados para se destacar em Exploração de Vagas e Mercado específicas, com recomendações personalizadas de habilidades e competências.",
             icon: "😎",
+            link: "best-profile",
             category: "Personalização de Perfil Profissional",
         },
         {

@@ -1,0 +1,138 @@
+/* .jobForm {
+    border: 2px solid lightgray;
+    padding: 1.8rem;
+    border-radius: 5px;
+    background: #f9f9f9;
+    display: grid;
+    transition: 0.2s ease-out;
+} */
+
+.jobForm:hover {
+    border-color: hsl(0, 0%, 70%);
+}
+
+.jobForm h3 {
+    margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
+}
+
+.inputContainer {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.multiColumn {
+    margin: 1.1rem 0;
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.input {
+    flex: 1;
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    font-size: 1.5em;
+    color: gray;
+    transition: 0.2s ease-out;
+}
+
+.input:hover {
+    color: var(--primary-color);
+
+    input,
+    textarea {
+        border-color: gray;
+    }
+}
+
+.input input,
+.input textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    outline: 1px solid transparent;
+    transition: 0.2s ease-out;
+}
+
+.input input:focus,
+.input textarea:focus {
+    border-color: gray;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.addButton,
+.resetButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addButton {
+    background-color: var(--primary-color);
+    font-weight: bold;
+    color: white;
+    transition: 0.2s;
+}
+
+.addButton:hover {
+    transform: translateY(-0.2rem);
+}
+
+.resetButton {
+    background-color: transparent;
+    color: gray;
+}
+
+.comparisonTable,
+.output table {
+    width: 100%;
+    border-spacing: 0.7rem;
+    /* border-collapse: collapse; */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.comparisonTable th,
+.comparisonTable td,
+.output th,
+.output td {
+    border: 1px solid lightgray;
+    padding: 1rem;
+    text-align: left;
+    transition: 0.2s ease-out;
+}
+
+.comparisonTable td:hover,
+.output td:hover {
+    border-color: gray;
+}
+
+.comparisonTable th,
+.output th {
+    background-color: hsl(0, 0%, 87%);
+}
+
+.comparisonTable thead th:first-child,
+.output thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.comparisonTable thead th:last-child,
+.output thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.comparisonTable tbody td,
+.output tbody td {
+    border-radius: 5px;
+}

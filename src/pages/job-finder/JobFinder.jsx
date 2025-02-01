@@ -4,7 +4,6 @@ import SubmitButton from "../../components/submit-button/SubmitButton";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
-import { LuBriefcaseBusiness } from "react-icons/lu";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
