@@ -69,7 +69,7 @@ function BestProfile() {
         <main className={styles.jobComparator}>
             <ReturnHome />
             <h1>😎 Gerador de Perfil Ideal para Vagas e Mercado</h1>
-            <p>
+            <p className="info">
                 Crie perfis otimizados para se destacar em Vagas e Mercados
                 específicos, com recomendações personalizadas de habilidades e
                 competências.

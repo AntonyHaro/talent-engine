@@ -79,7 +79,7 @@ export default function JobComparator() {
         <main className={styles.jobComparator}>
             <ReturnHome />
             <h1>⚖️ Comparador de Vagas</h1>
-            <p>
+            <p className="info">
                 Adicione informações das vagas que deseja comparar e veja os
                 resultados lado a lado.
             </p>

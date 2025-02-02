@@ -114,7 +114,7 @@ export default function Jobs() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         setLoading(true);
         setError(null);
 
@@ -140,8 +140,8 @@ export default function Jobs() {
 
             const data = await response.json();
             setJobs(data.jobs);
-        } catch (err) {
-            setError(err.message);
+        } catch (error) {
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -151,7 +151,7 @@ export default function Jobs() {
         <main className={styles.jobs}>
             <ReturnHome />
             <h1 className={styles.title}>💼 Buscador de Vagas</h1>
-            <p style={{ color: "gray", marginBottom: "3%" }}>
+            <p className="info">
                 Selecione os filtros que deseja para buscar vagas com parâmetros
                 personalizados.
             </p>
@@ -159,9 +159,7 @@ export default function Jobs() {
                 <div className={styles.multiColumn}>
                     <div className={styles.formGroup}>
                         <label htmlFor="searchTerm">
-                            <div className={styles.icon}>
-                                <IoMdSearch />
-                            </div>
+                            <IoMdSearch />
                             Palavras-chave
                         </label>
                         <input
@@ -174,47 +172,27 @@ export default function Jobs() {
                             required
                         />
                     </div>
-
                     <div className={styles.formGroup}>
                         <label htmlFor="location">
-                            <div className={styles.icon}>
-                                <MdOutlineLocationOn />
-                            </div>
+                            <MdOutlineLocationOn />
                             Localização
                         </label>
-                        <div className={styles.multiColumn}>
-                            <input
-                                type="text"
-                                id="location"
-                                name="location"
-                                value={formData.location}
-                                placeholder="Localização:"
-                                onChange={handleChange}
-                                required
-                            />
-                            <label
-                                htmlFor="isRemote"
-                                className={styles.isRemote}
-                            >
-                                Trabalho Remoto?
-                                <input
-                                    type="checkbox"
-                                    id="isRemote"
-                                    name="isRemote"
-                                    checked={formData.isRemote}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                        </div>
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            value={formData.location}
+                            placeholder="Localização:"
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
                 </div>
 
                 <div className={styles.multiColumn}>
                     <div className={styles.formGroup}>
                         <label htmlFor="siteName">
-                            <div className={styles.icon}>
-                                <CgWebsite />
-                            </div>
+                            <CgWebsite />
                             Site
                         </label>
                         <select
@@ -230,9 +208,7 @@ export default function Jobs() {
 
                     <div className={styles.formGroup}>
                         <label htmlFor="resultsWanted">
-                            <div className={styles.icon}>
-                                <MdFormatListNumbered />
-                            </div>
+                            <MdFormatListNumbered />
                             Quantidade de Resultados
                         </label>
                         <input
@@ -246,50 +222,53 @@ export default function Jobs() {
                     </div>
                 </div>
 
-                <div className={styles.formGroup}>
-                    <div className={styles.jobFormat}>
-                        {["fulltime", "parttime", "internship", "contract"].map(
-                            (type) => (
-                                <label
-                                    key={type}
-                                    className={`${styles.jobType} ${
-                                        formData.jobType === type
-                                            ? styles.selected
-                                            : ""
-                                    }`}
-                                >
-                                    {type === "fulltime" && "Tempo Integral"}
-                                    {type === "parttime" && "Meio Período"}
-                                    {type === "internship" && "Estágio"}
-                                    {type === "contract" && "Contrato"}
-                                    <input
-                                        type="radio"
-                                        name="jobType"
-                                        value={type}
-                                        checked={formData.jobType === type}
-                                        onChange={handleChange}
-                                    />
-                                </label>
-                            )
-                        )}
-                    </div>
+                <div className={styles.jobTypeContainer}>
+                    {["fulltime", "parttime", "internship", "contract"].map(
+                        (type) => (
+                            <label
+                                key={type}
+                                className={`${styles.jobType} ${
+                                    formData.jobType === type
+                                        ? styles.selected
+                                        : ""
+                                }`}
+                            >
+                                {type === "fulltime" && "Tempo Integral"}
+                                {type === "parttime" && "Meio Período"}
+                                {type === "internship" && "Estágio"}
+                                {type === "contract" && "Contrato"}
+                                <input
+                                    type="radio"
+                                    name="jobType"
+                                    value={type}
+                                    checked={formData.jobType === type}
+                                    onChange={handleChange}
+                                />
+                            </label>
+                        )
+                    )}
+                    <label
+                        htmlFor="isRemote"
+                        className={`${styles.isRemote} ${styles.jobType}`}
+                    >
+                        Trabalho Remoto?
+                        <input
+                            type="checkbox"
+                            id="isRemote"
+                            name="isRemote"
+                            checked={formData.isRemote}
+                            onChange={handleChange}
+                        />
+                    </label>
                 </div>
-
-                <SubmitButton
-                    text={"Buscar Vagas!"}
-                    loadingMessage={"Buscando..."}
-                    loading={loading}
-                    width={"50%"}
-                />
-
-                {/* <button
-                    type="submit"
-                    className={styles.button}
-                    disabled={loading}
-                >
-                    {loading ? "Buscando..." : "Buscar Vagas!"}
-                </button> */}
             </form>
+            <SubmitButton
+                text={"Buscar Vagas!"}
+                loadingMessage={"Buscando..."}
+                loading={loading}
+                width={"50%"}
+                onClick={handleSubmit}
+            />
             {error && <p className={styles.error}>Erro: {error}</p>}
             <div className={styles.results}>
                 <h2>Resultados Encontrados:</h2>

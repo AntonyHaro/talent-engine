@@ -46,7 +46,7 @@ export default function Home() {
             description:
                 "Encontre Exploração de Vagas e Mercado ideais com filtros como localização, área e palavras-chave, acessando múltiplas plataformas para resultados personalizados e relevantes.",
             icon: "💼",
-            link: "/job-finder",
+            link: "/jobs",
             category: "Exploração de Vagas e Mercado",
         },
         {

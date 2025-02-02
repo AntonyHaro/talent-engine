@@ -5,7 +5,7 @@
     --border: gray;
     --input-bgc: hsl(210, 7%, 87%);
     --primary-color: hsl(210, 5%, 15%);
-    /* --primary-color: hsl(210, 42%, 25%); */
+    /* --primary-color: hsl(210, 100%, 18%); */
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -24,10 +24,13 @@ body,
     -moz-osx-font-smoothing: grayscale;
     padding: 5rem;
     color: var(--text);
-    /* display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    gap: 6rem; */
+}
+
+* {
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 main {
@@ -37,9 +40,7 @@ main {
     gap: 2rem;
 }
 
-* {
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+.info {
+    color: gray;
+    line-height: 1.5;
 }

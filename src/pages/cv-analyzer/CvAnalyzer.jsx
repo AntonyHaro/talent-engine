@@ -85,7 +85,7 @@ export default function CvAnalyzer() {
             <h1 className={styles.title}>
                 👤 Analisador de Currículos Profissionais
             </h1>
-            <p>
+            <p className="info">
                 Adicione currículos e as informações da vaga para iniciar a
                 análise com a Inteligência Artificial.
             </p>
