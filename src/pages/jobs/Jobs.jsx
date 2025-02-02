@@ -7,7 +7,7 @@ import { CgWebsite } from "react-icons/cg";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
-import styles from "./JobFinder.module.css";
+import styles from "./Jobs.module.css";
 
 function JobCard({ job }) {
     const [saved, setSaved] = useState(false);
@@ -92,7 +92,7 @@ function JobCard({ job }) {
     );
 }
 
-export default function JobFinder() {
+export default function Jobs() {
     const [formData, setFormData] = useState({
         searchTerm: "",
         location: "",
