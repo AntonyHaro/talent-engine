@@ -53,7 +53,7 @@ function JobCard({ job }) {
     };
 
     return (
-        <div className={styles.jobCard}>
+        <div className={`${styles.jobCard} ${saved ? styles.jobSaved : ""}`}>
             <h2>{job.title}</h2>
             <div className={styles.jobInfo}>
                 <p>

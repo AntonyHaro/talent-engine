@@ -1,31 +1,31 @@
 import styles from "./Actions.module.css";
-import PropTypes from "prop-types";
-import SubmitButton from "../components/submit-button/SubmitButton";
+import SubmitButton from "../submit-button/SubmitButton";
 
 export default function Actions({
-    onCompare,
-    onAddJob,
+    onSubmit,
+    onAdd,
     onReset,
-    compareText = "Fazer Comparação",
+    submitButtonText,
     loadingMessage = "Carregando...",
     loading = false,
-    addJobText = "+ Vaga",
-    resetText = "Reiniciar Comparação",
+    addButtonText,
 }) {
     return (
         <div className={styles.actions}>
             <SubmitButton
-                text={compareText}
+                text={submitButtonText}
                 loadingMessage={loadingMessage}
                 loading={loading}
                 width={"30%"}
-                onClick={onCompare}
+                onClick={onSubmit}
             />
-            <button className={styles.addButton} onClick={onAddJob}>
-                {addJobText}
-            </button>
+            {onAdd && (
+                <button className={styles.addButton} onClick={onAdd}>
+                    {addButtonText}
+                </button>
+            )}
             <button className={styles.resetButton} onClick={onReset}>
-                {resetText}
+                Limpar Campos
             </button>
         </div>
     );

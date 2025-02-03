@@ -5,6 +5,7 @@ import MarkdownComponent from "../../components/markdown-component/MarkdownCompo
 import ReturnHome from "../../components/return-home/ReturnHome";
 import SubmitButton from "../../components/submit-button/SubmitButton";
 import FormCard from "../../components/form-card/FormCard";
+import Actions from "../../components/actions/Actions";
 
 import { MdOutlineSubtitles } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
@@ -28,18 +29,18 @@ export default function JobComparator() {
         console.log(jobs);
     };
 
-    const addJob = () => {
+    const handleAdd = () => {
         setJobs([...jobs, { title: "", description: "", salary: "" }]);
     };
 
-    const resetComparison = () => {
+    const handleReset = () => {
         setJobs([
             { title: "", description: "", salary: "" },
             { title: "", description: "", salary: "" },
         ]);
     };
 
-    const handleComparator = async () => {
+    const handleSubmit = async () => {
         try {
             // Verifica se todas as descrições estão preenchidas
             const isDataComplete = jobs.every((job) => job.description);
@@ -147,24 +148,15 @@ export default function JobComparator() {
                     </FormCard>
                 ))}
             </div>
-            <div className={styles.actions}>
-                <SubmitButton
-                    text={"Fazer Comparação"}
-                    loadingMessage={"Carregando..."}
-                    loading={loading}
-                    width={"30%"}
-                    onClick={handleComparator}
-                />
-                <button className={styles.addButton} onClick={addJob}>
-                    + Vaga
-                </button>
-                <button
-                    className={styles.resetButton}
-                    onClick={resetComparison}
-                >
-                    Reiniciar Comparação
-                </button>
-            </div>
+
+            <Actions
+                onSubmit={handleSubmit}
+                onAdd={handleAdd}
+                onReset={handleReset}
+                submitButtonText={"Fazer Comparação"}
+                loading={loading}
+                addButtonText={"+ Vaga"}
+            />
 
             {error && <p className={styles.error}>Erro: {error}</p>}
             {comparison && <MarkdownComponent>{comparison}</MarkdownComponent>}

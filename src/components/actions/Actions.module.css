@@ -1,0 +1,33 @@
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.addButton,
+.resetButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.addButton {
+    background-color: var(--primary-color);
+    font-weight: bold;
+    color: white;
+}
+
+.addButton:hover {
+    transform: translateY(-0.2rem);
+}
+
+.resetButton {
+    background-color: transparent;
+    color: gray;
+}
+
+.resetButton:hover {
+    color: black;
+}
