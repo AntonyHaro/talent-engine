@@ -3,12 +3,14 @@ import SubmitButton from "../submit-button/SubmitButton";
 
 export default function Actions({
     onSubmit,
+    submitButtonText,
+    submitButtonWidth = "30%",
+    loading = false,
+    loadingMessage = "Carregando...",
+    addButtonText,
     onAdd,
     onReset,
-    submitButtonText,
-    loadingMessage = "Carregando...",
-    loading = false,
-    addButtonText,
+    marginBottom = true,
 }) {
     return (
         <div className={styles.actions}>
@@ -16,7 +18,7 @@ export default function Actions({
                 text={submitButtonText}
                 loadingMessage={loadingMessage}
                 loading={loading}
-                width={"30%"}
+                width={submitButtonWidth}
                 onClick={onSubmit}
             />
             {onAdd && (

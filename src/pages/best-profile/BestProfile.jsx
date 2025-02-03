@@ -4,6 +4,7 @@ import axios from "axios";
 import ReturnHome from "../../components/return-home/ReturnHome";
 import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
 import SubmitButton from "../../components/submit-button/SubmitButton";
+import Actions from "../../components/actions/Actions";
 
 import { MdOutlineSubtitles } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
@@ -33,7 +34,7 @@ function BestProfile() {
         }));
     };
 
-    const resetForm = () => {
+    const handleReset = () => {
         setJob({
             title: "",
             level: "",
@@ -136,18 +137,14 @@ function BestProfile() {
                     </div>
                 </div>
             </div>
-            <div className={styles.actions}>
-                <SubmitButton
-                    text={"Gerar Perfil"}
-                    loadingMessage={"Carregando..."}
-                    loading={loading}
-                    width={"30%"}
-                    onClick={handleSubmit}
-                />
-                <button className={styles.resetButton} onClick={resetForm}>
-                    Reiniciar Campos
-                </button>
-            </div>
+
+            <Actions
+                onSubmit={handleSubmit}
+                onReset={handleReset}
+                submitButtonText={"Gerar Perfil"}
+                loading={loading}
+                addButtonText={"+ Candidato"}
+            />
 
             {error && <p className={styles.error}>Erro: {error}</p>}
             {output && <MarkdownComponent>{output}</MarkdownComponent>}

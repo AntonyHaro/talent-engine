@@ -44,3 +44,7 @@ main {
     color: gray;
     line-height: 1.5;
 }
+
+.error {
+    color: rgb(175, 43, 43);
+}

@@ -3,7 +3,8 @@ import axios from "axios";
 
 import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
 import ReturnHome from "../../components/return-home/ReturnHome";
-import SubmitButton from "../../components/submit-button/SubmitButton";
+import Actions from "../../components/actions/Actions";
+import FormCard from "../../components/form-card/FormCard";
 
 import { MdOutlinePersonOutline } from "react-icons/md";
 
@@ -17,7 +18,7 @@ export default function CvAnalyzer() {
     const [analysis, setAnalysis] = useState("");
     const fileInputRefs = useRef([]);
 
-    const resetAnalysis = () => {
+    const handleReset = () => {
         setCvFiles([null]);
         setJob("");
         fileInputRefs.current.forEach((ref) => {
@@ -25,9 +26,14 @@ export default function CvAnalyzer() {
         });
     };
 
-    const addCvForm = () => {
-        setCvFiles([...cvFiles, { file: null }]);
-    };
+    const handleAdd = () => {
+        if (cvFiles.length < 4) {
+            setCvFiles([...cvFiles, { file: null }]);
+            return
+        }
+
+        alert("É possível comparar até 4 candidatos!")
+    };  
 
     const handleFileChange = (event, index) => {
         const newFiles = [...cvFiles];
@@ -35,7 +41,7 @@ export default function CvAnalyzer() {
         setCvFiles(newFiles);
     };
 
-    const handleAnalysis = async () => {
+    const handleSubmit = async () => {
         if (cvFiles.length === 0 || cvFiles.some((cv) => !cv.file)) {
             alert("Selecione pelo menos um arquivo de currículo.");
             return;
@@ -59,15 +65,11 @@ export default function CvAnalyzer() {
         setAnalysis(null);
 
         try {
-            const { data } = await axios.post(
-                "/api/cv-analyzer",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
+            const { data } = await axios.post("/api/cv-analyzer", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
 
             console.log(data);
             setAnalysis(data.response);
@@ -91,11 +93,13 @@ export default function CvAnalyzer() {
             </p>
             <div className={styles.cvForms}>
                 {cvFiles.map((cv, index) => (
-                    <div key={index} className={styles.cvForm}>
+                    <FormCard key={index}>
                         <h3>
                             <MdOutlinePersonOutline /> Candidato {index + 1}
                         </h3>
-                        <p>Anexe o currículo do candidato no formato PDF:</p>
+                        <p style={{ marginBottom: "5%" }}>
+                            Anexe o currículo do candidato no formato PDF:
+                        </p>
                         <div className={styles.inputContainer}>
                             <div className={styles.input}>
                                 <input
@@ -117,28 +121,18 @@ export default function CvAnalyzer() {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </FormCard>
                 ))}
             </div>
-            <div className={styles.actions}>
-                <SubmitButton
-                    text={"Carregar Análise"}
-                    loadingMessage={"Carregando..."}
-                    loading={loading}
-                    width={"30%"}
-                    onClick={handleAnalysis}
-                />
-                <button className={styles.addButton} onClick={addCvForm}>
-                    + Candidato
-                </button>
-                <button
-                    type="button"
-                    className={styles.resetButton}
-                    onClick={resetAnalysis}
-                >
-                    Limpar Campos
-                </button>
-            </div>
+
+            <Actions
+                onSubmit={handleSubmit}
+                onAdd={handleAdd}
+                onReset={handleReset}
+                submitButtonText={"Fazer Comparação"}
+                loading={loading}
+                addButtonText={"+ Candidato"}
+            />
 
             {error && <p className={styles.error}>Erro: {error}</p>}
 

@@ -1,12 +1,16 @@
 import { useState } from "react";
+
 import ReturnHome from "../../components/return-home/ReturnHome";
 import SubmitButton from "../../components/submit-button/SubmitButton";
+import Actions from "../../components/actions/Actions";
+
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { CgWebsite } from "react-icons/cg";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
+
 import styles from "./Jobs.module.css";
 
 function JobCard({ job }) {
@@ -147,6 +151,17 @@ export default function Jobs() {
         }
     };
 
+    const handleReset = () => {
+        setFormData({
+            searchTerm: "",
+            location: "",
+            siteName: "linkedin",
+            resultsWanted: 20,
+            isRemote: false,
+            jobType: "fulltime",
+        });
+    };
+
     return (
         <main className={styles.jobs}>
             <ReturnHome />
@@ -262,14 +277,17 @@ export default function Jobs() {
                     </label>
                 </div>
             </form>
-            <SubmitButton
-                text={"Buscar Vagas!"}
-                loadingMessage={"Buscando..."}
+
+            <Actions
+                submitButtonWidth="35%"
+                submitButtonText={"Buscar Vagas"}
+                onSubmit={handleSubmit}
+                onReset={handleReset}
                 loading={loading}
-                width={"50%"}
-                onClick={handleSubmit}
             />
+
             {error && <p className={styles.error}>Erro: {error}</p>}
+
             <div className={styles.results}>
                 <h2>Resultados Encontrados:</h2>
                 {jobs.length <= 0 ? (
