@@ -96,6 +96,7 @@ export default function JobComparator() {
                                 <input
                                     type="text"
                                     placeholder="Título da vaga"
+                                    name="job-title"
                                     value={job.title}
                                     onChange={(e) =>
                                         handleJobChange(
@@ -112,6 +113,7 @@ export default function JobComparator() {
                                 <MdOutlineSubtitles />
                                 <textarea
                                     placeholder="Descrição da vaga"
+                                    name="job-description"
                                     value={job.description}
                                     onChange={(e) =>
                                         handleJobChange(

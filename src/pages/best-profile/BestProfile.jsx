@@ -75,65 +75,79 @@ function BestProfile() {
                 específicos, com recomendações personalizadas de habilidades e
                 competências.
             </p>
-            <div className={styles.jobForm}>
-                <div className={styles.inputContainer}>
-                    <div className={styles.multiColumn}>
-                        <div className={styles.input}>
+            <div className={styles.form}>
+                <div className={styles.multiColumn}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="title">
                             <PiChatCenteredDotsBold />
-                            <input
-                                type="text"
-                                name="title"
-                                placeholder="Título da vaga:"
-                                className={styles.jobTitle}
-                                value={job.title}
-                                onChange={handleJobChange}
-                            />
-                        </div>
+                            Título da Vaga
+                        </label>
 
-                        <div className={styles.input}>
-                            <RiMoneyDollarCircleLine />
-                            <input
-                                type="text"
-                                name="salary"
-                                placeholder="Salário (opcional):"
-                                value={job.salary}
-                                onChange={handleJobChange}
-                            />
-                        </div>
-                    </div>
-
-                    <div className={styles.input}>
-                        <MdOutlineSubtitles />
-                        <textarea
-                            name="description"
-                            placeholder="Descrição da vaga:"
-                            value={job.description}
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Título da vaga:"
+                            className={styles.jobTitle}
+                            value={job.title}
                             onChange={handleJobChange}
-                            style={{ height: "180px", resize: "vertical" }}
                         />
                     </div>
 
-                    <div className={styles.multiColumn}>
-                        <div className={styles.input}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="salary">
+                            <RiMoneyDollarCircleLine />
+                            Salário (opcional)
+                        </label>
+                        <input
+                            type="text"
+                            name="salary"
+                            placeholder="Salário:"
+                            value={job.salary}
+                            onChange={handleJobChange}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.inputGroup}>
+                    <label htmlFor="description">
+                        <MdOutlineSubtitles />
+                        Descrição da Vaga
+                    </label>
+                    <textarea
+                        name="description"
+                        placeholder="Descrição da vaga:"
+                        value={job.description}
+                        onChange={handleJobChange}
+                        style={{ height: "180px", resize: "vertical" }}
+                    />
+                </div>
+
+                <div className={styles.multiColumn}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="level">
                             <TbStairsUp />
-                            <input
-                                type="text"
-                                name="level"
-                                placeholder="Nível da vaga:"
-                                value={job.level}
-                                onChange={handleJobChange}
-                            />
-                        </div>
-                        <div className={styles.input}>
+                            Nível da Vaga/Experiência
+                        </label>
+                        <input
+                            type="text"
+                            name="level"
+                            placeholder="Nível da Vaga:"
+                            value={job.level}
+                            onChange={handleJobChange}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="sector">
                             <GrBook />
-                            <input
-                                type="text"
-                                name="sector"
-                                placeholder="Setor da vaga:"
-                                value={job.sector}
-                                onChange={handleJobChange}
-                            />
-                        </div>
+                            Setor da Vaga
+                        </label>
+                        <input
+                            type="text"
+                            name="sector"
+                            placeholder="Setor da vaga:"
+                            value={job.sector}
+                            onChange={handleJobChange}
+                        />
                     </div>
                 </div>
             </div>

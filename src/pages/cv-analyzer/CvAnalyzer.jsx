@@ -29,11 +29,11 @@ export default function CvAnalyzer() {
     const handleAdd = () => {
         if (cvFiles.length < 4) {
             setCvFiles([...cvFiles, { file: null }]);
-            return
+            return;
         }
 
-        alert("É possível comparar até 4 candidatos!")
-    };  
+        alert("É possível comparar até 4 candidatos!");
+    };
 
     const handleFileChange = (event, index) => {
         const newFiles = [...cvFiles];
@@ -110,7 +110,7 @@ export default function CvAnalyzer() {
                             <div className={styles.input}>
                                 <input
                                     type="file"
-                                    name={`file-input-${index}`}
+                                    name="file-input"
                                     onChange={(event) =>
                                         handleFileChange(event, index)
                                     }

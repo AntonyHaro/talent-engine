@@ -1,9 +1,8 @@
 .markdownComponent {
-    padding: 2.7rem;
+    padding: 3rem;
     border: 1px solid lightgray;
     border-radius: 5px;
-    /* font-size: 14px; */
-    /* width: 70vw; */
+    line-height: 1.6;
     background-color: transparent;
     overflow: hidden;
     margin-top: 2%;
@@ -29,7 +28,6 @@
 .markdownComponent h2 {
     font-size: 2em;
     opacity: 0.95;
-    padding-bottom: 1rem;
 }
 
 .markdownComponent h3 {

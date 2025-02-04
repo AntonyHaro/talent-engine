@@ -172,7 +172,7 @@ export default function Jobs() {
             </p>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.multiColumn}>
-                    <div className={styles.formGroup}>
+                    <div className={styles.inputGroup}>
                         <label htmlFor="searchTerm">
                             <IoMdSearch />
                             Palavras-chave
@@ -187,7 +187,7 @@ export default function Jobs() {
                             required
                         />
                     </div>
-                    <div className={styles.formGroup}>
+                    <div className={styles.inputGroup}>
                         <label htmlFor="location">
                             <MdOutlineLocationOn />
                             Localização
@@ -205,7 +205,7 @@ export default function Jobs() {
                 </div>
 
                 <div className={styles.multiColumn}>
-                    <div className={styles.formGroup}>
+                    <div className={styles.inputGroup}>
                         <label htmlFor="siteName">
                             <CgWebsite />
                             Site
@@ -221,7 +221,7 @@ export default function Jobs() {
                         </select>
                     </div>
 
-                    <div className={styles.formGroup}>
+                    <div className={styles.inputGroup}>
                         <label htmlFor="resultsWanted">
                             <MdFormatListNumbered />
                             Quantidade de Resultados
