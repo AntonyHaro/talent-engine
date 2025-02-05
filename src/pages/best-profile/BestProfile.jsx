@@ -85,8 +85,9 @@ function BestProfile() {
 
                         <input
                             type="text"
-                            name="title"
                             placeholder="Título da vaga:"
+                            name="title"
+                            id="title"
                             className={styles.jobTitle}
                             value={job.title}
                             onChange={handleJobChange}
@@ -100,8 +101,9 @@ function BestProfile() {
                         </label>
                         <input
                             type="text"
-                            name="salary"
                             placeholder="Salário:"
+                            name="salary"
+                            id="salary"
                             value={job.salary}
                             onChange={handleJobChange}
                         />
@@ -114,8 +116,9 @@ function BestProfile() {
                         Descrição da Vaga
                     </label>
                     <textarea
-                        name="description"
                         placeholder="Descrição da vaga:"
+                        name="description"
+                        id="description"
                         value={job.description}
                         onChange={handleJobChange}
                         style={{ height: "180px", resize: "vertical" }}
@@ -130,8 +133,9 @@ function BestProfile() {
                         </label>
                         <input
                             type="text"
-                            name="level"
                             placeholder="Nível da Vaga:"
+                            name="level"
+                            id="level"
                             value={job.level}
                             onChange={handleJobChange}
                         />
@@ -143,8 +147,9 @@ function BestProfile() {
                         </label>
                         <input
                             type="text"
-                            name="sector"
                             placeholder="Setor da vaga:"
+                            name="sector"
+                            id="sector"
                             value={job.sector}
                             onChange={handleJobChange}
                         />

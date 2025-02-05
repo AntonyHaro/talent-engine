@@ -165,7 +165,7 @@ export default function Jobs() {
     return (
         <main className={styles.jobs}>
             <ReturnHome />
-            <h1 className={styles.title}>💼 Buscador de Vagas</h1>
+            <h1 className={styles.title}>💼 Explorador de Vagas</h1>
             <p className="info">
                 Selecione os filtros que deseja para buscar vagas com parâmetros
                 personalizados.
