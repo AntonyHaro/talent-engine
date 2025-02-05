@@ -90,9 +90,14 @@ export default function JobComparator() {
                             Vaga {index + 1}
                             {job.title != "" ? ` - ${job.title}` : ""}
                         </h3>
+                        <hr />
                         <div className={styles.inputContainer}>
-                            <div className={styles.input}>
-                                <PiChatCenteredDotsBold />
+                            <div className={styles.inputGroup}>
+                                <label htmlFor="job-title">
+                                    <PiChatCenteredDotsBold />
+                                    Título da Vaga:
+                                </label>
+
                                 <input
                                     type="text"
                                     placeholder="Título da vaga"
@@ -109,8 +114,11 @@ export default function JobComparator() {
                             </div>
 
                             {/* Descrição da vaga */}
-                            <div className={styles.input}>
-                                <MdOutlineSubtitles />
+                            <div className={styles.inputGroup}>
+                                <label htmlFor="job-description">
+                                    <MdOutlineSubtitles />
+                                    Descrição da Vaga:
+                                </label>
                                 <textarea
                                     placeholder="Descrição da vaga"
                                     name="job-description"
@@ -130,10 +138,15 @@ export default function JobComparator() {
                             </div>
 
                             {/* Salário (opcional) */}
-                            <div className={styles.input}>
-                                <RiMoneyDollarCircleLine />
+                            <div className={styles.inputGroup}>
+                                <label htmlFor="job-salary">
+                                    <RiMoneyDollarCircleLine />
+                                    Salário (opcinal):
+                                </label>
+
                                 <input
                                     type="text"
+                                    name="job-salary"
                                     placeholder="Salário (opcional)"
                                     value={job.salary}
                                     onChange={(e) =>
