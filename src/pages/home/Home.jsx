@@ -53,14 +53,12 @@ function RecentActivity() {
                 Atividades recentes:
             </p>
             {recentActivity.map((activity, index) => (
-                <Link
-                    to={activity.link}
-                    key={index}
-                    className={styles.activity}
-                >
-                    {activity.name}
+                <div className={styles.activity}>
+                    <Link to={activity.link} key={index}>
+                        {activity.name}
+                    </Link>
                     <IoClose onClick={() => handleDelete(activity)} />
-                </Link>
+                </div>
             ))}
         </ul>
     );
@@ -170,7 +168,12 @@ export default function Home() {
         <>
             {/* <button className={styles.menuButton}>*</button> */}
             <main className={styles.home}>
-                <h1 className={styles.title}>Painel Principal - TalentAI</h1>
+                <h1 className={styles.title}>
+                    Painel Principal -{" "}
+                    <span style={{color: "darkgray"}}>
+                        Talent<span style={{ color: "darkgray" }}>AI</span>
+                    </span>
+                </h1>
                 <p className={styles.info}>
                     Navegue pelas ferramentas inovadoras que criamos para
                     simplificar sua transição de carreira. De buscas
