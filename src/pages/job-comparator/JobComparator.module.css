@@ -45,8 +45,8 @@
 .inputGroup svg {
     font-size: 1.2em;
     color: var(--primary-color);
+    color: gray;
 }
-
 
 .inputGroup input,
 .inputGroup textarea {

@@ -6,13 +6,15 @@ import ReturnHome from "../../components/return-home/ReturnHome";
 import Actions from "../../components/actions/Actions";
 import FormCard from "../../components/form-card/FormCard";
 
-import { MdOutlinePersonOutline } from "react-icons/md";
+import { MdOutlineSubtitles } from "react-icons/md";
+import { FaRegFileAlt } from "react-icons/fa";
+import { PiChatCenteredDotsBold } from "react-icons/pi";
 
 import styles from "./CvAnalyzer.module.css";
 
 export default function CvAnalyzer() {
     const [cvFiles, setCvFiles] = useState([{ file: null }]);
-    const [job, setJob] = useState("");
+    const [job, setJob] = useState({ title: "", description: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [analysis, setAnalysis] = useState("");
@@ -41,6 +43,14 @@ export default function CvAnalyzer() {
         setCvFiles(newFiles);
     };
 
+    const handleJobChange = (e) => {
+        const { name, value } = e.target;
+        setJob((prevJob) => ({
+            ...prevJob,
+            [name]: value,
+        }));
+    };
+
     const handleSubmit = async () => {
         if (cvFiles.length === 0 || cvFiles.some((cv) => !cv.file)) {
             alert("Selecione pelo menos um arquivo de currículo.");
@@ -58,7 +68,7 @@ export default function CvAnalyzer() {
             console.log(cv.file);
         });
 
-        // formData.append("message", job);
+        formData.append("job", job);
 
         setLoading(true);
         setError(null);
@@ -91,23 +101,54 @@ export default function CvAnalyzer() {
                 Adicione currículos e as informações da vaga para iniciar a
                 análise com a Inteligência Artificial.
             </p>
+            <div className={styles.jobForm}>
+                <h3>Informações da Vaga:</h3>
+                <div className={styles.inputContainer}>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="title">
+                            <PiChatCenteredDotsBold /> Título da Vaga:
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Título da vaga"
+                            name="title"
+                            id="title"
+                            value={job.title}
+                            onChange={handleJobChange}
+                        />
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="description">
+                            <MdOutlineSubtitles /> Descrição da Vaga:
+                        </label>
+                        <textarea
+                            placeholder="Descrição da vaga"
+                            value={job.description}
+                            name="description"
+                            id="description"
+                            onChange={handleJobChange}
+                            style={{
+                                height: "140px",
+                                resize: "vertical",
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
             <div className={styles.cvForms}>
                 {cvFiles.map((cv, index) => (
                     <FormCard key={index}>
-                        <h3>
-                            <MdOutlinePersonOutline /> Candidato {index + 1}
-                        </h3>
-                        <p style={{ marginBottom: "5%" }}>
+                        <h3>Candidato {index + 1}</h3>
+                        <p style={{ marginBottom: "1rem" }}>
                             Anexe o currículo do candidato no formato PDF:
                         </p>
                         <div className={styles.inputContainer}>
-                            <div className={styles.input}>
-                                <input
-                                    type="text"
-                                    placeholder="Nome do candidato:"
-                                />
-                            </div>
-                            <div className={styles.input}>
+                            <div className={styles.inputGroup}>
+                                <label htmlFor="file-input">
+                                    <FaRegFileAlt />
+                                    Currículo do Candidato:
+                                </label>
                                 <input
                                     type="file"
                                     name="file-input"
@@ -124,7 +165,6 @@ export default function CvAnalyzer() {
                     </FormCard>
                 ))}
             </div>
-
             <Actions
                 onSubmit={handleSubmit}
                 onAdd={handleAdd}
@@ -133,9 +173,7 @@ export default function CvAnalyzer() {
                 loading={loading}
                 addButtonText={"+ Candidato"}
             />
-
             {error && <p className={styles.error}>Erro: {error}</p>}
-
             {analysis && <MarkdownComponent>{analysis}</MarkdownComponent>}
         </main>
     );

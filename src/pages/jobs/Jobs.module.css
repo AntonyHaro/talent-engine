@@ -135,7 +135,7 @@
 
 .jobCard {
     border: 1px solid hsla(0, 0%, 0%, 0.3);
-    padding: 1.3rem;
+    padding: 1.7rem 2rem;
     border-radius: 5px;
     display: grid;
     /* flex-direction: column; */
@@ -147,7 +147,7 @@
 .jobCard:hover {
     border-color: var(--border);
 
-    button {
+    .buttonContainer {
         opacity: 1;
     }
 }
@@ -179,37 +179,51 @@
     /* padding-left: 0.25rem; */
 }
 
-.flexContainer {
-    margin-top: 1%;
+.jobActions {
+    margin-top: 3%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
 }
 
-.flexContainer button {
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     opacity: 0;
-    border: none;
-    border: 1px solid hsla(0, 0%, 0%, 0.45);
-    padding: 0.4rem 0.7rem;
+    transition: 0.2s;
     color: hsla(0, 0%, 0%, 0.45);
+}
+
+.buttonContainer button {
+    color: hsla(0, 0%, 0%, 0.45);
+    border: none;
     background-color: transparent;
-    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.4rem;
     font-weight: bold;
+    transition: 0.1s;
+    font-size: 1.1em;
+}
+
+.buttonContainer button:hover {
+    border-color: hsla(0, 0%, 0%, 0.7);
+    color: hsla(0, 0%, 0%, 0.7);
+    transform: translateY(-0.1rem);
+}
+/* 
+.closeButton {
+    width: fit-content;
+    border: none;
+    background-color: transparent;
+    color: lightgray;
+    cursor: pointer;
     transition: 0.2s;
 }
 
-.flexContainer button svg {
-    font-size: 1.5em;
-}
-
-.flexContainer button:hover {
-    /* border-color: var(--primary-color);
-    color: var(--primary-color); */
-    border-color: hsla(0, 0%, 0%, 0.7);
-    color: hsla(0, 0%, 0%, 0.7);
-}
+.closeButton:hover {
+    color: black;
+} */

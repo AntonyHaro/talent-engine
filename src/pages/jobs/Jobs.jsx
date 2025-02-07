@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import ReturnHome from "../../components/return-home/ReturnHome";
-import SubmitButton from "../../components/submit-button/SubmitButton";
 import Actions from "../../components/actions/Actions";
 
 import { IoMdSearch } from "react-icons/io";
@@ -10,6 +9,8 @@ import { CgWebsite } from "react-icons/cg";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
+import { IoIosCloseCircle } from "react-icons/io";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 import styles from "./Jobs.module.css";
 
@@ -56,9 +57,33 @@ function JobCard({ job }) {
         console.log(updatedFavoriteJobs);
     };
 
+    const handleDelete = (job) => {
+        if (!job || typeof job !== "object") {
+            console.error("O argumento precisa ser um objeto válido.");
+            return;
+        }
+
+        console.log(job);
+
+        const deletedJobs =
+            JSON.parse(localStorage.getItem("deletedJobs")) || [];
+
+        const isAlreadyDeleted = deletedJobs.some((fav) => fav.id === job.id);
+        if (isAlreadyDeleted) {
+            return;
+        }
+
+        const updatedDeletedJobs = [...deletedJobs, job];
+
+        localStorage.setItem("deletedJobs", JSON.stringify(updatedDeletedJobs));
+
+        console.log(updatedDeletedJobs);
+    };
+
     return (
         <div className={`${styles.jobCard} ${saved ? styles.jobSaved : ""}`}>
-            <h2>{job.title}</h2>
+            <h2>{job.title} </h2>
+
             <div className={styles.jobInfo}>
                 <p>
                     <strong>Empresa: </strong> {job.company}
@@ -76,21 +101,33 @@ function JobCard({ job }) {
                     {job.date_posted || "Não informada"}
                 </p>
             </div>
-            <div className={styles.flexContainer}>
+            <div className={styles.jobActions}>
                 <a href={job.job_url} target="_blank" rel="noopener noreferrer">
                     Ver vaga
                 </a>
-                <button onClick={() => handleSave(job)}>
-                    {saved ? (
-                        <>
-                            <FaStar /> Vaga salva
-                        </>
-                    ) : (
-                        <>
-                            <FaRegStar /> Salvar vaga
-                        </>
-                    )}
-                </button>
+                <div className={styles.buttonContainer}>
+                    <button
+                        className={styles.saveJob}
+                        onClick={() => handleSave(job)}
+                    >
+                        {saved ? (
+                            <>
+                                <FaStar />
+                            </>
+                        ) : (
+                            <>
+                                <FaRegStar />
+                            </>
+                        )}
+                    </button>
+                    <p>|</p>
+                    <button
+                        className={styles.deleteButton}
+                        onClick={() => handleDelete(job)}
+                    >
+                        <FaRegTrashCan />
+                    </button>
+                </div>
             </div>
         </div>
     );
@@ -118,7 +155,17 @@ export default function Jobs() {
     };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        const filterJobs = (rawJobs) => {
+            const deletedJobs =
+                JSON.parse(localStorage.getItem("deletedJobs")) || [];
+
+            const filteredJobs = rawJobs.filter(
+                (job) => !deletedJobs.some((deleted) => deleted.id === job.id)
+            );
+
+            return filteredJobs;
+        };
+
         setLoading(true);
         setError(null);
 
@@ -143,7 +190,7 @@ export default function Jobs() {
             }
 
             const data = await response.json();
-            setJobs(data.jobs);
+            setJobs(filterJobs(data.jobs));
         } catch (error) {
             setError(error.message);
         } finally {

@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import MarkdownComponent from "../../components/markdown-component/MarkdownComponent";
 import ReturnHome from "../../components/return-home/ReturnHome";
-import SubmitButton from "../../components/submit-button/SubmitButton";
 import FormCard from "../../components/form-card/FormCard";
 import Actions from "../../components/actions/Actions";
 
-import { MdOutlineSubtitles } from "react-icons/md";
+import { MdOutlinePersonOutline, MdOutlineSubtitles } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { PiChatCenteredDotsBold } from "react-icons/pi";
 
@@ -20,16 +19,21 @@ export default function JobComparator() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [comparison, setComparison] = useState(null);
+    const fileInputRefs = useRef([]);
 
     const handleJobChange = (index, field, value) => {
-        const updatedJobs = [...jobs];
-        updatedJobs[index][field] = value;
-        setJobs(updatedJobs);
-        console.log(jobs);
+        setJobs((prevJobs) => {
+            const updatedJobs = [...prevJobs];
+            updatedJobs[index][field] = value;
+            return updatedJobs;
+        });
     };
 
     const handleAdd = () => {
-        setJobs([...jobs, { title: "", description: "", salary: "" }]);
+        setJobs((prevJobs) => [
+            ...prevJobs,
+            { title: "", description: "", salary: "" },
+        ]);
     };
 
     const handleReset = () => {
@@ -40,25 +44,21 @@ export default function JobComparator() {
     };
 
     const handleSubmit = async () => {
+        if (jobs.some((job) => !job.description)) {
+            setError(
+                "Preencha a descrição completa das vagas antes de comparar."
+            );
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
         try {
-            // Verifica se todas as descrições estão preenchidas
-            const isDataComplete = jobs.every((job) => job.description);
-
-            if (!isDataComplete) {
-                setError(
-                    "Preencha a descrição completa das vagas antes de comparar."
-                );
-                return;
-            }
-
-            setLoading(true);
-
             const response = await fetch("/api/jobs-comparator", {
-                headers: {
-                    "Content-Type": "application/json",
-                },
                 method: "POST",
-                body: JSON.stringify({ jobs: jobs }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ jobs }),
             });
 
             if (!response.ok) {
@@ -83,25 +83,41 @@ export default function JobComparator() {
                 Adicione informações das vagas que deseja comparar e veja os
                 resultados lado a lado.
             </p>
+
+            <FormCard>
+                <h3>
+                    <MdOutlinePersonOutline /> Candidato
+                </h3>
+                <p>Anexe o currículo do candidato no formato PDF:</p>
+                <div className={styles.inputContainer}>
+                    <div className={styles.input}>
+                        <input type="text" placeholder="Nome do candidato:" />
+                    </div>
+                    <div className={styles.input}>
+                        <input
+                            type="file"
+                            className={styles.fileInput}
+                            ref={(el) => (fileInputRefs.current[0] = el)}
+                        />
+                    </div>
+                </div>
+            </FormCard>
             <div className={styles.jobForms}>
                 {jobs.map((job, index) => (
                     <FormCard key={index}>
                         <h3>
                             Vaga {index + 1}
-                            {job.title != "" ? ` - ${job.title}` : ""}
+                            {job.title && ` - ${job.title}`}
                         </h3>
                         <hr />
                         <div className={styles.inputContainer}>
                             <div className={styles.inputGroup}>
-                                <label htmlFor="job-title">
-                                    <PiChatCenteredDotsBold />
-                                    Título da Vaga:
+                                <label>
+                                    <PiChatCenteredDotsBold /> Título da Vaga:
                                 </label>
-
                                 <input
                                     type="text"
                                     placeholder="Título da vaga"
-                                    name="job-title"
                                     value={job.title}
                                     onChange={(e) =>
                                         handleJobChange(
@@ -113,15 +129,12 @@ export default function JobComparator() {
                                 />
                             </div>
 
-                            {/* Descrição da vaga */}
                             <div className={styles.inputGroup}>
-                                <label htmlFor="job-description">
-                                    <MdOutlineSubtitles />
-                                    Descrição da Vaga:
+                                <label>
+                                    <MdOutlineSubtitles /> Descrição da Vaga:
                                 </label>
                                 <textarea
                                     placeholder="Descrição da vaga"
-                                    name="job-description"
                                     value={job.description}
                                     onChange={(e) =>
                                         handleJobChange(
@@ -137,16 +150,13 @@ export default function JobComparator() {
                                 />
                             </div>
 
-                            {/* Salário (opcional) */}
                             <div className={styles.inputGroup}>
-                                <label htmlFor="job-salary">
-                                    <RiMoneyDollarCircleLine />
-                                    Salário (opcinal):
+                                <label>
+                                    <RiMoneyDollarCircleLine /> Salário
+                                    (opcional):
                                 </label>
-
                                 <input
                                     type="text"
-                                    name="job-salary"
                                     placeholder="Salário (opcional)"
                                     value={job.salary}
                                     onChange={(e) =>
@@ -167,9 +177,9 @@ export default function JobComparator() {
                 onSubmit={handleSubmit}
                 onAdd={handleAdd}
                 onReset={handleReset}
-                submitButtonText={"Fazer Comparação"}
+                submitButtonText="Fazer Comparação"
                 loading={loading}
-                addButtonText={"+ Vaga"}
+                addButtonText="+ Vaga"
             />
 
             {error && <p className={styles.error}>Erro: {error}</p>}
