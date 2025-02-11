@@ -1,4 +1,5 @@
 import styles from "./SubmitButton.module.css";
+import { PulseLoader } from "react-spinners";
 
 export default function SubmitButton({
     text,
@@ -15,7 +16,14 @@ export default function SubmitButton({
             disabled={loading}
             onClick={onClick || null}
         >
-            {loading ? loadingMessage : text}
+            {loading ? (
+                <>
+                    <PulseLoader color="gray" size={5} />
+                    <span> {loadingMessage}</span>
+                </>
+            ) : (
+                text
+            )}
         </button>
     );
 }

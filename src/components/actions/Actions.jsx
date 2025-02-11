@@ -6,11 +6,10 @@ export default function Actions({
     submitButtonText,
     submitButtonWidth = "30%",
     loading = false,
-    loadingMessage = "Carregando...",
+    loadingMessage = "Carregando",
     addButtonText,
     onAdd,
     onReset,
-    marginBottom = true,
 }) {
     return (
         <div className={styles.actions}>

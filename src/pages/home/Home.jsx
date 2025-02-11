@@ -49,17 +49,23 @@ function RecentActivity() {
 
     return (
         <ul className={styles.recentActivity}>
-            <p style={{ color: "gray", paddingRight: "0.7rem" }}>
+            <p style={{ color: "gray", paddingRight: "0.6rem" }}>
                 Atividades recentes:
             </p>
-            {recentActivity.map((activity, index) => (
-                <div className={styles.activity}>
-                    <Link to={activity.link} key={index}>
-                        {activity.name}
-                    </Link>
-                    <IoClose onClick={() => handleDelete(activity)} />
-                </div>
-            ))}
+            {recentActivity.length > 0 ? (
+                recentActivity.map((activity, index) => (
+                    <div className={styles.activity}>
+                        <Link to={activity.link} key={index}>
+                            {activity.name}
+                        </Link>
+                        <IoClose onClick={() => handleDelete(activity)} />
+                    </div>
+                ))
+            ) : (
+                <p style={{ color: "gray", fontWeight: "bold" }}>
+                    Nenhuma atividade recente no momento...
+                </p>
+            )}
         </ul>
     );
 }
@@ -70,37 +76,29 @@ export default function Home() {
         {
             name: "Explorador de Vagas",
             description:
-                "Encontre vagas ideais com filtros como localização, área e palavras-chave, acessando múltiplas plataformas para resultados personalizados e relevantes.",
+                "Encontre vagas com filtros personalizados, acessando as melhores plataformas para resultados relevantes.",
             icon: "💼",
             link: "/jobs",
             category: "Exploração de Vagas e Mercado",
         },
         {
-            name: "Comparador de Vagas",
+            name: "Analisador de Currículos",
             description:
-                "Compare diferentes oportunidades de emprego lado a lado, considerando salário, benefícios, crescimento e outros fatores essenciais para sua escolha.",
-            icon: "⚖️",
-            link: "/job-comparator",
-            category: "Exploração de Vagas e Mercado",
-        },
-        {
-            name: "Analisador de Currículos Profissionais",
-            description:
-                "Avalie seu Currículo Profissional com IA, comparando-o a Exploração de Vagas e Mercado para obter insights sobre compatibilidade e sugestões de melhorias.",
+                "Analisador de Currículos com IA, analisando currículos com uma vaga de referência para obter insights sobre compatibilidade e sugestões de melhorias.",
             icon: "👤",
             link: "/cv-analyzer",
             category: "Personalização de Perfil Profissional",
         },
         {
-            name: "Gerador de Perfil Ideal para Vagas e Mercado",
+            name: "Gerador de Perfil Ideal",
             description:
-                "Crie perfis otimizados para se destacar em Exploração de Vagas e Mercado específicas, com recomendações personalizadas de habilidades e competências.",
+                "Gerador de perfis otimizados para se destacar em vagas específicas, com recomendações personalizadas de habilidades e competências.",
             icon: "😎",
             link: "/best-profile",
             category: "Personalização de Perfil Profissional",
         },
         {
-            name: "Busca de Cargos e Faixa Salarial",
+            name: "Cargos e Faixa Salarial",
             description:
                 "Pesquise cargos e descubra faixas salariais atualizadas para entender o mercado e planejar sua carreira.",
             icon: "📊",
@@ -121,14 +119,14 @@ export default function Home() {
             category: "Orientação e Planejamento de Carreira",
         },
         {
-            name: "Match de Cultura Organizacional",
+            name: "Match de Cultura Corporativa",
             description:
                 "Avalie a compatibilidade com a cultura das empresas, alinhando valores e estilo de trabalho. Aumente suas chances de sucesso ao encontrar o ambiente ideal para você.",
             icon: "🏢",
             category: "Orientação e Planejamento de Carreira",
         },
         {
-            name: "Checar Reputações de Empresas",
+            name: "Reputações de Empresas",
             description:
                 "Pesquise e analise a reputação de empresas com base em avaliações de funcionários e ex-funcionários. Tome decisões informadas sobre onde você quer trabalhar.",
             icon: "⭐",
@@ -170,7 +168,7 @@ export default function Home() {
             <main className={styles.home}>
                 <h1 className={styles.title}>
                     Painel Principal -{" "}
-                    <span style={{color: "darkgray"}}>
+                    <span style={{ color: "darkgray" }}>
                         Talent<span style={{ color: "darkgray" }}>AI</span>
                     </span>
                 </h1>
@@ -193,9 +191,8 @@ export default function Home() {
                             to={feature.link}
                             onClick={() => handleHistory(feature)}
                         >
-                            <h2>
-                                {feature.icon} {feature.name}
-                            </h2>
+                            <h1>{feature.icon}</h1>
+                            <h2>{feature.name}</h2>
                             <p>{feature.description}</p>
                         </Link>
                     ))}

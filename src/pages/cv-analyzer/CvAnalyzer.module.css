@@ -1,3 +1,11 @@
+.cvAnalyzer hr {
+    border: 0;
+    height: 3px;
+    width: 50%;
+    background-color: lightgray;
+    margin-bottom: 1rem;
+}
+
 .jobForm {
     display: grid;
     gap: 0.7rem;

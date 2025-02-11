@@ -100,12 +100,14 @@
 
 .feature {
     text-decoration: none;
-    padding: 2rem;
-    border: 1px solid lightgray;
+    padding: 1.7rem;
+    border: 2px dashed lightgray;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
+    font-size: 0.9em;
     transition: 0.2s ease-out;
 }
 
@@ -116,10 +118,12 @@
 }
 
 .feature h2 {
+    text-align: center;
     color: hsl(210, 15%, 10%);
 }
 
 .feature p {
     line-height: 1.4;
     color: hsl(0, 0%, 30%);
+    text-align: center;
 }

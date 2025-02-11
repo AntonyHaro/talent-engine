@@ -9,13 +9,16 @@ import { CgWebsite } from "react-icons/cg";
 import { MdFormatListNumbered } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
-import { IoIosCloseCircle } from "react-icons/io";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { FaUndoAlt } from "react-icons/fa";
 
 import styles from "./Jobs.module.css";
 
 function JobCard({ job }) {
     const [saved, setSaved] = useState(false);
+    const [deleted, setDeleted] = useState(false);
+
+    // colocar um useEffect aqui para buscar os itens do localstorage para marcar itens já favoritados
 
     const handleSave = (job) => {
         if (!job || typeof job !== "object") {
@@ -63,8 +66,6 @@ function JobCard({ job }) {
             return;
         }
 
-        console.log(job);
-
         const deletedJobs =
             JSON.parse(localStorage.getItem("deletedJobs")) || [];
 
@@ -77,11 +78,38 @@ function JobCard({ job }) {
 
         localStorage.setItem("deletedJobs", JSON.stringify(updatedDeletedJobs));
 
-        console.log(updatedDeletedJobs);
+        setDeleted(true);
     };
 
+    if (deleted) {
+        return (
+            <div className={`${styles.jobCard} ${styles.jobDeleted}`}>
+                <h2>{job.title}</h2>
+                <div className={styles.jobInfo}>
+                    <p>
+                        <strong>Empresa: </strong> {job.company}
+                    </p>
+                    <p>
+                        <strong>Localidade: </strong>
+                        {job.location || "Não informada"}
+                    </p>
+                </div>
+                <p style={{ color: "hsla(0, 0%, 0%, 0.45)", marginTop: "2%" }}>
+                    Vaga removida, não a mostraremos novamente!
+                </p>
+                <button className={styles.undoButton}>
+                    <FaUndoAlt /> Desfazer?
+                </button>
+            </div>
+        );
+    }
+
     return (
-        <div className={`${styles.jobCard} ${saved ? styles.jobSaved : ""}`}>
+        <div
+            className={`${styles.jobCard} ${saved ? styles.jobSaved : ""} ${
+                deleted ? styles.jobDeleted : ""
+            }`}
+        >
             <h2>{job.title} </h2>
 
             <div className={styles.jobInfo}>
@@ -213,6 +241,7 @@ export default function Jobs() {
         <main className={styles.jobs}>
             <ReturnHome />
             <h1 className={styles.title}>💼 Explorador de Vagas</h1>
+            <hr />
             <p className="info">
                 Selecione os filtros que deseja para buscar vagas com parâmetros
                 personalizados.

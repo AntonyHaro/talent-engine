@@ -1,0 +1,126 @@
+.results {
+    width: 100%;
+    /* margin-top: 3rem; */
+    display: grid;
+    gap: 2rem;
+}
+
+.jobsContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.jobCard {
+    border: 1px solid hsla(0, 0%, 0%, 0.3);
+    padding: 1.7rem 2rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: 0.2s ease-out;
+    font-size: 0.95em;
+}
+
+.jobCard:hover {
+    border-color: var(--border);
+
+    .buttonContainer {
+        opacity: 1;
+    }
+}
+
+.jobSaved {
+    background-color: hsl(120, 100%, 90%);
+}
+
+.jobDeleted {
+    background-color: hsl(0, 100%, 92%);
+}
+
+.jobCard h2 {
+    color: var(--primary-color);
+}
+
+.jobInfo {
+    color: hsla(0, 0%, 0%, 0.7);
+    display: grid;
+    gap: 0.4rem;
+}
+
+.jobActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 0.7rem;
+    margin-top: auto;
+}
+
+.jobCard a {
+    text-decoration: none;
+    color: hsl(210, 30%, 50%);
+    font-weight: bold;
+    transition: 0.2s;
+    /* margin-top: auto; */
+}
+
+.jobCard a:hover {
+    color: hsl(210, 87%, 30%);
+    /* padding-left: 0.25rem; */
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: 0.2s;
+    color: hsla(0, 0%, 0%, 0.45);
+}
+
+.buttonContainer button {
+    color: hsla(0, 0%, 0%, 0.45);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: bold;
+    transition: 0.1s;
+    font-size: 1.1em;
+}
+
+.buttonContainer button:hover {
+    border-color: hsla(0, 0%, 0%, 0.7);
+    color: hsla(0, 0%, 0%, 0.7);
+    transform: translateY(-0.1rem);
+}
+
+.undoButton {
+    width: fit-content;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    color: hsla(0, 0%, 0%, 0.45);
+    cursor: pointer;
+    transition: 0.1s;
+
+    svg {
+        transition: 0.3s ease-out;
+    }
+}
+
+.undoButton:hover {
+    transform: translateY(-0.1rem);
+    color: hsla(0, 0%, 0%, 0.7);
+
+    svg {
+        transform: rotateZ(-320deg);
+    }
+}
