@@ -102,6 +102,36 @@ export default function CvAnalyzer() {
                 Adicione currículos e as informações da vaga para iniciar a
                 análise com a Inteligência Artificial.
             </p>
+
+            <div className={styles.cvForms}>
+                {cvFiles.map((cv, index) => (
+                    <FormCard key={index}>
+                        <h3>Candidato {index + 1}</h3>
+                        <p style={{ marginBottom: "1rem" }}>
+                            Anexe o currículo do candidato no formato PDF:
+                        </p>
+                        <div className={styles.inputContainer}>
+                            <div className={styles.inputGroup}>
+                                <label htmlFor="file-input">
+                                    <FaRegFileAlt />
+                                    Currículo do Candidato:
+                                </label>
+                                <input
+                                    type="file"
+                                    name="file-input"
+                                    onChange={(event) =>
+                                        handleFileChange(event, index)
+                                    }
+                                    className={styles.fileInput}
+                                    ref={(el) =>
+                                        (fileInputRefs.current[index] = el)
+                                    }
+                                />
+                            </div>
+                        </div>
+                    </FormCard>
+                ))}
+            </div>
             <div className={styles.jobForm}>
                 <h3>Informações da Vaga:</h3>
                 <div className={styles.inputContainer}>
@@ -136,35 +166,6 @@ export default function CvAnalyzer() {
                         />
                     </div>
                 </div>
-            </div>
-            <div className={styles.cvForms}>
-                {cvFiles.map((cv, index) => (
-                    <FormCard key={index}>
-                        <h3>Candidato {index + 1}</h3>
-                        <p style={{ marginBottom: "1rem" }}>
-                            Anexe o currículo do candidato no formato PDF:
-                        </p>
-                        <div className={styles.inputContainer}>
-                            <div className={styles.inputGroup}>
-                                <label htmlFor="file-input">
-                                    <FaRegFileAlt />
-                                    Currículo do Candidato:
-                                </label>
-                                <input
-                                    type="file"
-                                    name="file-input"
-                                    onChange={(event) =>
-                                        handleFileChange(event, index)
-                                    }
-                                    className={styles.fileInput}
-                                    ref={(el) =>
-                                        (fileInputRefs.current[index] = el)
-                                    }
-                                />
-                            </div>
-                        </div>
-                    </FormCard>
-                ))}
             </div>
             <Actions
                 onSubmit={handleSubmit}

@@ -21,6 +21,7 @@ function BestProfile() {
         sector: "",
         description: "",
         salary: "",
+        jobLevel: "junior", // Adiciona a propriedade para armazenar o tipo da vaga
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -41,6 +42,7 @@ function BestProfile() {
             sector: "",
             description: "",
             salary: "",
+            jobLevel: "junior",
         });
     };
 
@@ -56,7 +58,6 @@ function BestProfile() {
                     headers: { "Content-Type": "application/json" },
                 }
             );
-            console.log(data.response);
             setOutput(data.response);
         } catch (error) {
             console.error(error);
@@ -83,7 +84,6 @@ function BestProfile() {
                             <PiChatCenteredDotsBold />
                             Título da Vaga
                         </label>
-
                         <input
                             type="text"
                             placeholder="Título da vaga:"
@@ -126,38 +126,44 @@ function BestProfile() {
                     />
                 </div>
 
-                <div className={styles.multiColumn}>
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="level">
-                            <TbStairsUp />
-                            Nível da Vaga/Experiência
+                <div className={styles.jobLevelContainer}>
+                    {[
+                        "junior",
+                        "mid-level",
+                        "senior",
+                        "manager",
+                        "executive",
+                    ].map((type) => (
+                        <label
+                            key={type}
+                            className={`${styles.jobLevel} ${
+                                job.jobLevel === type ? styles.selected : ""
+                            }`}
+                            style={{ display: "block", cursor: "pointer" }}
+                        >
+                            {type === "junior" && "Júnior"}
+                            {type === "mid-level" && "Pleno"}
+                            {type === "senior" && "Sênior"}
+                            {type === "manager" && "Gerente"}
+                            {type === "executive" && "Executivo"}
+
+                            <input
+                                type="radio"
+                                name="jobLevel"
+                                value={type}
+                                checked={job.jobLevel === type}
+                                onChange={() =>
+                                    setJob((prevJob) => ({
+                                        ...prevJob,
+                                        jobLevel: type,
+                                    }))
+                                }
+                            />
                         </label>
-                        <input
-                            type="text"
-                            placeholder="Nível da Vaga:"
-                            name="level"
-                            id="level"
-                            value={job.level}
-                            onChange={handleJobChange}
-                        />
-                    </div>
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="sector">
-                            <GrBook />
-                            Setor da Vaga
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="Setor da vaga:"
-                            name="sector"
-                            id="sector"
-                            value={job.sector}
-                            onChange={handleJobChange}
-                        />
-                    </div>
+                    ))}
                 </div>
             </div>
-
+            
             <Actions
                 onSubmit={handleSubmit}
                 onReset={handleReset}

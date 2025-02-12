@@ -44,7 +44,6 @@ function JobCard({ job }) {
             );
 
             setSaved(false);
-            console.log(updatedFavoriteJobs);
             return;
         }
 
@@ -57,7 +56,6 @@ function JobCard({ job }) {
         );
 
         setSaved(true);
-        console.log(updatedFavoriteJobs);
     };
 
     const handleDelete = (job) => {
@@ -69,11 +67,25 @@ function JobCard({ job }) {
         const deletedJobs =
             JSON.parse(localStorage.getItem("deletedJobs")) || [];
 
+        // Verifica se o job já está nos favoritos
         const isAlreadyDeleted = deletedJobs.some((fav) => fav.id === job.id);
+
         if (isAlreadyDeleted) {
+            // Remove o job dos favoritos
+            const updatedDeletedJobs = deletedJobs.filter(
+                (fav) => fav.id !== job.id
+            );
+
+            localStorage.setItem(
+                "deletedJobs",
+                JSON.stringify(updatedDeletedJobs)
+            );
+
+            setDeleted(false);
             return;
         }
 
+        // Adiciona o job aos favoritos
         const updatedDeletedJobs = [...deletedJobs, job];
 
         localStorage.setItem("deletedJobs", JSON.stringify(updatedDeletedJobs));
@@ -85,6 +97,7 @@ function JobCard({ job }) {
         return (
             <div className={`${styles.jobCard} ${styles.jobDeleted}`}>
                 <h2>{job.title}</h2>
+                <p>{"⭐".repeat(Math.floor(Math.random() * 3) + 3)}</p>
                 <div className={styles.jobInfo}>
                     <p>
                         <strong>Empresa: </strong> {job.company}
@@ -97,7 +110,10 @@ function JobCard({ job }) {
                 <p style={{ color: "hsla(0, 0%, 0%, 0.45)", marginTop: "2%" }}>
                     Vaga removida, não a mostraremos novamente!
                 </p>
-                <button className={styles.undoButton}>
+                <button
+                    className={styles.undoButton}
+                    onClick={() => handleDelete(job)}
+                >
                     <FaUndoAlt /> Desfazer?
                 </button>
             </div>
@@ -111,7 +127,7 @@ function JobCard({ job }) {
             }`}
         >
             <h2>{job.title} </h2>
-
+            <p>{"⭐".repeat(Math.floor(Math.random() * 3) + 3)}</p>
             <div className={styles.jobInfo}>
                 <p>
                     <strong>Empresa: </strong> {job.company}
@@ -133,7 +149,17 @@ function JobCard({ job }) {
                 <a href={job.job_url} target="_blank" rel="noopener noreferrer">
                     Ver vaga
                 </a>
-                <div className={styles.buttonContainer}>
+                <div
+                    className={styles.buttonContainer}
+                    style={saved ? { opacity: "1" } : {}}
+                >
+                    <button
+                        className={styles.deleteButton}
+                        onClick={() => handleDelete(job)}
+                    >
+                        <FaRegTrashCan />
+                    </button>
+                    <p>|</p>
                     <button
                         className={styles.saveJob}
                         onClick={() => handleSave(job)}
@@ -147,13 +173,6 @@ function JobCard({ job }) {
                                 <FaRegStar />
                             </>
                         )}
-                    </button>
-                    <p>|</p>
-                    <button
-                        className={styles.deleteButton}
-                        onClick={() => handleDelete(job)}
-                    >
-                        <FaRegTrashCan />
                     </button>
                 </div>
             </div>
