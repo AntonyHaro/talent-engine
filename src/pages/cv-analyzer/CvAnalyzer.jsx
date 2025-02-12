@@ -14,7 +14,8 @@ import styles from "./CvAnalyzer.module.css";
 
 export default function CvAnalyzer() {
     const [cvFiles, setCvFiles] = useState([{ file: null }]);
-    const [job, setJob] = useState({ title: "", description: "" });
+    const [jobTitle, setJobTitle] = useState("");
+    const [jobDescription, setJobDescription] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [analysis, setAnalysis] = useState("");
@@ -22,7 +23,8 @@ export default function CvAnalyzer() {
 
     const handleReset = () => {
         setCvFiles([null]);
-        setJob("");
+        setJobTitle("");
+        setJobDescription("");
         fileInputRefs.current.forEach((ref) => {
             if (ref) ref.value = "";
         });
@@ -43,14 +45,6 @@ export default function CvAnalyzer() {
         setCvFiles(newFiles);
     };
 
-    const handleJobChange = (e) => {
-        const { name, value } = e.target;
-        setJob((prevJob) => ({
-            ...prevJob,
-            [name]: value,
-        }));
-    };
-
     const handleSubmit = async () => {
         if (cvFiles.length === 0 || cvFiles.some((cv) => !cv.file)) {
             alert("Selecione pelo menos um arquivo de currículo.");
@@ -68,7 +62,8 @@ export default function CvAnalyzer() {
             console.log(cv.file);
         });
 
-        formData.append("job", job);
+        formData.append("jobTitle", jobTitle);
+        formData.append("jobDescription", jobDescription);
 
         setLoading(true);
         setError(null);
@@ -113,8 +108,7 @@ export default function CvAnalyzer() {
                         <div className={styles.inputContainer}>
                             <div className={styles.inputGroup}>
                                 <label htmlFor="file-input">
-                                    <FaRegFileAlt />
-                                    Currículo do Candidato:
+                                    <FaRegFileAlt /> Currículo do Candidato:
                                 </label>
                                 <input
                                     type="file"
@@ -144,8 +138,8 @@ export default function CvAnalyzer() {
                             placeholder="Título da vaga"
                             name="title"
                             id="title"
-                            value={job.title}
-                            onChange={handleJobChange}
+                            value={jobTitle}
+                            onChange={(e) => setJobTitle(e.target.value)}
                         />
                     </div>
 
@@ -155,14 +149,11 @@ export default function CvAnalyzer() {
                         </label>
                         <textarea
                             placeholder="Descrição da vaga"
-                            value={job.description}
+                            value={jobDescription}
                             name="description"
                             id="description"
-                            onChange={handleJobChange}
-                            style={{
-                                height: "140px",
-                                resize: "vertical",
-                            }}
+                            onChange={(e) => setJobDescription(e.target.value)}
+                            style={{ height: "140px", resize: "vertical" }}
                         />
                     </div>
                 </div>
