@@ -70,7 +70,7 @@ function BestProfile() {
     return (
         <main className={styles.bestProfile}>
             <ReturnHome />
-            <h1>😎 Gerador de Perfil Ideal para Vagas e Mercado</h1>
+            <h1>😎 Gerador de Perfil Ideal</h1>
             <hr />
             <p className="info">
                 Crie perfis otimizados para se destacar em Vagas e Mercados
@@ -163,7 +163,7 @@ function BestProfile() {
                     ))}
                 </div>
             </div>
-            
+
             <Actions
                 onSubmit={handleSubmit}
                 onReset={handleReset}

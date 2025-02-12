@@ -90,7 +90,7 @@ export default function CvAnalyzer() {
         <main className={styles.cvAnalyzer}>
             <ReturnHome />
             <h1 className={styles.title}>
-                👤 Analisador de Currículos Profissionais
+                👤 Analisador de Currículos
             </h1>
             <hr />
             <p className="info">
